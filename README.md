@@ -188,7 +188,7 @@ README.md                  ← updated below
 # The Wellbeing Framework
 > **CO₂ = P × (Social + Environmental + Fish + Soil + Water + Minerals)/P × kWh/Wellbeing × CO₂/kWh**  
 > *The first planetary accounting system that measures human and ecological survival per kilowatt*  
-> **Pascal Ranaora** | @MadaGasBit | November 11, 2025
+> **Pascal Ranoroarijaona** | @MadaGasBit | November 11, 2025
 
 ---
 
@@ -227,8 +227,8 @@ python wellbeing_pwrs.py
 ## Cite
 
 ```bibtex
-@misc{ranaora2025wellbeing,
-  author = {Ranaora, Pascal},
+@misc{Ranoroarijaona2025wellbeing,
+  author = {Ranoroarijaona, Pascal},
   title = {The Wellbeing Framework: From Human Flourishing to Planetary Resource Stocks},
   year = {2025},
   month = {November},
