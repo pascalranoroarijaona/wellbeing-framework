@@ -9,9 +9,9 @@ All equations are **accounting identities** — exact, decomposable, and policy-
 
 ## 1. **Wellbeing Identity** *(Core Equation)*
 
-$
+$$
 \boxed{F = P \times \frac{W}{P} \times \frac{E}{W} \times \frac{F}{E}}
-$
+$$
 
 | Term | Meaning | Unit |
 |------|--------|------|
@@ -27,9 +27,9 @@ $
 
 ## 2. **W-GS: Wellbeing from Goods & Services**
 
-$
+$$
 \boxed{W = \sum_{i=1}^{n} \alpha_i q_i}
-$
+$$
 
 | Term | Meaning |
 |------|--------|
@@ -43,9 +43,9 @@ $
 
 ## 3. **W-GSES: + Environmental Services**
 
-$
+$$
 \boxed{W = \sum_{i} \alpha_i q_i + \sum_{j} \beta_j e_j}
-$
+$$
 
 | Term | Meaning |
 |------|--------|
@@ -58,14 +58,14 @@ $
 
 ## 4. **W-PWRS: + Planetary Resource Stocks** *(Flagship)*
 
-$
+$$
 \boxed{
 \begin{aligned}
 F &= P \times \frac{W_{\text{social}} + W_{\text{env}} + W_{\text{stocks}}}{P} \times \frac{E}{W_{\text{total}}} \times \frac{F}{E} 
 W_{\text{total}} &= \sum \alpha_i q_i + \sum \beta_j e_j + \sum \gamma_k s_k
 \end{aligned}
 }
-$
+$$
 
 | Term | Meaning | Example |
 |------|--------|--------|
@@ -78,9 +78,9 @@ $
 
 ## 5. **W-PWRS Dynamics** *(Future)*
 
-$
+$$
 \boxed{\frac{d s_k}{dt} = r_k(s_k) - d_k(q_i, e_j) + m_k(\text{management})}
-$
+$$
 
 | Term | Meaning |
 |------|--------|
@@ -94,9 +94,9 @@ $
 
 ## 6. **Wellbeing Efficiency Frontier**
 
-$
+$$
 \boxed{E/W = \text{kWh per Wellbeing Unit (WU)}}
-$
+$$
 
 - **Global target**: **< 5,000 kWh/WU by 2050**
 - **Best practice (2025)**: Denmark ~8,000 kWh/WU
@@ -105,9 +105,9 @@ $
 
 ## 7. **Wellbeing Inequality (Gini)**
 
-$
+$$
 \boxed{G_W = \frac{\sum_{i=1}^n \sum_{j=1}^n |W_i - W_j|}{2n^2 \bar{W}}}
-$
+$$
 
 - $W_i$ = wellbeing of individual $i$
 - **Target**: $G_W < 0.3$ globally
@@ -116,9 +116,9 @@ $
 
 ## 8. **National Wellbeing Accounts (NWA)**
 
-$
+$$
 \boxed{\text{NWA} = P \times \frac{W}{P}}
-$
+$$
 
 > *Replaces GDP in national statistics.*
 
@@ -126,9 +126,9 @@ $
 
 ## 9. **Corporate Wellbeing Footprint**
 
-$
+$$
 \boxed{\text{CWF} = \frac{E_{\text{company}} + E_{\text{supply chain}}}{W_{\text{employees}} + W_{\text{communities}}}}
-$
+$$
 
 > *kWh per Wellbeing Unit delivered.*
 
@@ -136,9 +136,9 @@ $
 
 ## 10. **Planetary Boundaries Constraint**
 
-$
+$$
 \boxed{s_k \geq s_{k,\text{min}} \quad \forall k}
-$
+$$
 
 | Boundary | $s_{k,\text{min}}$ |
 |--------|------------------|
