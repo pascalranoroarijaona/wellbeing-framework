@@ -149,35 +149,21 @@ $$
 
 ---
 
-## 11. Cryptographic Provenance of Wellbeing Data (The D-Trinity Layer)
+## 11. Cryptographic Provenance of Wellbeing Data (The Decentralized Trinity Layer)
 To ensure planetary resource data ($s_j$) is immutable, uncensorable, and immune to institutional manipulation, all stock variables must pass through a decentralized verification layer using the D-Trinity structure:
 $V_{stock}(t) = \text{SHA-256}\Big(s_j(t) \parallel \text{Nostr}_{relays} \parallel \text{Hash}_{BTC}(t)\Big)$
 *Where $V_{stock}$ provides the mathematical guarantee of truth for the wellbeing index at time $t$.*
 
 ---
 
-## 12. Thermodynamic Action in Networked Ecosystems (Nakamoto Action)
-The stability of human wellbeing relies on the energy expenditure required to secure its data and resources.
-$S_{Nakamoto} = \int_{t_0}^{t_1} \left( P_{network}(t) - \Delta U_{security}(t) \right) dt$
-*Where $P_{network}$ is the power drawn by the verification network, and $U_{security}$ is the thermodynamic utility of systemic consensus.*
-
----
-
-## 13. Micro-Wellbeing: Cellular Thermodynamics
-Macro-wellbeing is an aggregation of micro-states. To measure individual human capital $q_{health}$, we move beyond bed-days to thermodynamic metabolic efficiency and cellular preservation:
-$W_{bio} = \int_{t_1}^{t_2} \left( \mathcal{R}_{metabolic}(t) \times \lambda_{autophagy} \right) dt$
-*Where $\mathcal{R}$ represents optimized physiological energy ratios and $\lambda$ represents the rate of cellular regeneration.*
-
----
-
-## 14. High-Convexity Pricing of Resource Depletion ($C_{PWRS}$)
+## 12. High-Convexity Pricing of Resource Depletion ($C_{PWRS}$)
 To properly penalize the depletion of critical planetary stocks, the framework applies a high-convexity second derivative to energy efficiency, modeling ecological collapse as a financialized tail-risk:
 $C_{PWRS} = \frac{1}{W} \frac{\partial^2 W}{\partial E^2}$
 *This ensures that as energy $E$ usage accelerates towards a planetary boundary, the cost function geometrically explodes.*
 
 ---
 
-## 15. Comparison with Doughnut Economics
+## Comparison with Doughnut Economics
 
 | Aspect | Doughnut | Wellbeing Framework |
 |------|----------|---------------------|
