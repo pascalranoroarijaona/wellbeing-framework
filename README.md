@@ -19,11 +19,11 @@
 | **1. Wellbeing Identity** | $F = P \times \frac{W}{P} \times \frac{E}{W} \times \frac{F}{E}$ | 2025 | Replace GDP with **W = wellbeing** |
 | **2. W-GS** | $W = \sum \alpha_i q_i$ | 2025 | Wellbeing = **weighted social goods & services** |
 | **3. W-GSES** | $W = \sum \alpha q + \sum \beta e$ | 2025-2030 | Add **environmental services** |
-| **4. W-PWRS** | $W = \sum \alpha q + \sum \beta e + \sum \gamma s$ | **2026–2044** | Add **planetary resource stocks** |
-| **5. W-PWRS-Dynamics** | $\frac{dW}{dt} = f(q,e,s,\text{depletion})$ | **2026–2044** | Model **stock depletion & regeneration** |
+| **4. W-PWRS** | $W = \sum \alpha q + \sum \beta e + \sum \gamma s$ | **2026–2035** | Add **planetary resource stocks** |
+| **5. W-PWRS-Dynamics** | $\frac{dW}{dt} = f(q,e,s,\text{depletion})$ | **2026–2035** | Model **stock depletion & regeneration** |
 | **6. W-PWRS-Equity** | $W_j = \sum \alpha q_j + \beta e_j + \gamma s_j$ | 2029 | Per-country, per-income-quintile |
 | **7. W-PWRS-Boundaries** | $W \leq W_{\text{max}}(s_{\text{min}})$ | 2030 | Link to **planetary boundaries** |
-| **8. W-PWRS-Futures** | Scenario pathways to 2100 | 2**2026–2044** | SSPs reimagined |
+| **8. W-PWRS-Futures** | Scenario pathways to 2100 | **2026–2035** | SSPs reimagined |
 
 ---
 
