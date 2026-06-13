@@ -18,12 +18,12 @@
 |------|--------|------|-------------|
 | **1. Wellbeing Identity** | $F = P \times \frac{W}{P} \times \frac{E}{W} \times \frac{F}{E}$ | 2025 | Replace GDP with **W = wellbeing** |
 | **2. W-GS** | $W = \sum \alpha_i q_i$ | 2025 | Wellbeing = **weighted social goods & services** |
-| **3. W-GSES** | $W = \sum \alpha q + \sum \beta e$ | 2025 | Add **environmental services** |
-| **4. W-PWRS** | $W = \sum \alpha q + \sum \beta e + \sum \gamma s$ | **2025** | Add **planetary resource stocks** |
-| **5. W-PWRS-Dynamics** | $\frac{dW}{dt} = f(q,e,s,\text{depletion})$ | 2026 | Model **stock depletion & regeneration** |
-| **6. W-PWRS-Equity** | $W_j = \sum \alpha q_j + \beta e_j + \gamma s_j$ | 2027 | Per-country, per-income-quintile |
-| **7. W-PWRS-Boundaries** | $W \leq W_{\text{max}}(s_{\text{min}})$ | 2028 | Link to **planetary boundaries** |
-| **8. W-PWRS-Futures** | Scenario pathways to 2100 | 2029–2035 | SSPs reimagined |
+| **3. W-GSES** | $W = \sum \alpha q + \sum \beta e$ | 2025-2030 | Add **environmental services** |
+| **4. W-PWRS** | $W = \sum \alpha q + \sum \beta e + \sum \gamma s$ | **2026–2044** | Add **planetary resource stocks** |
+| **5. W-PWRS-Dynamics** | $\frac{dW}{dt} = f(q,e,s,\text{depletion})$ | **2026–2044** | Model **stock depletion & regeneration** |
+| **6. W-PWRS-Equity** | $W_j = \sum \alpha q_j + \beta e_j + \gamma s_j$ | 2029 | Per-country, per-income-quintile |
+| **7. W-PWRS-Boundaries** | $W \leq W_{\text{max}}(s_{\text{min}})$ | 2030 | Link to **planetary boundaries** |
+| **8. W-PWRS-Futures** | Scenario pathways to 2100 | 2**2026–2044** | SSPs reimagined |
 
 ---
 
@@ -131,10 +131,10 @@
 | Year | Milestone |
 |------|----------|
 | **2025** | Launch W-PWRS + GitHub + X thread |
-| **2026** | First global dataset (OWID + UN + FAO) |
-| **2027** | UN Statistical Commission adopts WU |
-| **2028** | IPCC AR7 cites Wellbeing Framework |
-| **2030** | 50 countries adopt National Wellbeing Accounts |
+| **2027** | First global dataset (OWID + UN + FAO) |
+| **2029** | UN Statistical Commission adopts WU |
+| **2031** | IPCC AR7 cites Wellbeing Framework |
+| **2033** | 50 countries adopt National Wellbeing Accounts |
 | **2035** | **Wellbeing per kWh** becomes the **primary global sustainability KPI** |
 
 ---
