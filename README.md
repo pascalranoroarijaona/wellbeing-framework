@@ -52,7 +52,7 @@
 
 ### **3. Planetary Stock Dynamics**
 - **Model**:
-  $frac{ds_j}{dt} = r_j(s_j) - d_j(q,e) + m_j(\text{management})$
+  $\frac{ds_j}{dt} = r_j(s_j) - d_j(q,e) + m_j(\text{management})$
 - **Examples**:
   - Fish: logistic growth − catch
   - Soil C: sequestration − erosion
@@ -73,9 +73,7 @@
 
 ### **5. Equity & Distribution**
 - **Gini of Wellbeing**:
-  \[
-  G_W = \frac{\sum |W_i - W_j|}{2n^2 \bar{W}}
-  \]
+  $G_W = \frac{\sum |W_i - W_j|}{2n^2 \bar{W}}$
 - **Target**: $G_W < 0.3$ globally
 
 > **Paper 5**: *"Wellbeing Inequality: A New SDG Indicator"* (Lancet Planetary Health, 2027)
@@ -84,9 +82,7 @@
 
 ### **6. Planetary Boundaries Integration**
 - **Safe Operating Space**:
-  \[
-  s_j \geq s_{j,\text{min}} \quad \forall j
-  \]
+  $s_j \geq s_{j,\text{min}} \quad \forall j$
 - **Link to Rockström (2009)**
 
 > **Paper 6**: *"The Wellbeing Framework within Planetary Boundaries"* (Nature, 2028)
