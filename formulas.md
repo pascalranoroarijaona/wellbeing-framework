@@ -151,15 +151,15 @@ $$
 
 ## 11. Cryptographic Provenance of Wellbeing Data (The Decentralized Trinity Layer)
 To ensure planetary resource data ($s_j$) is immutable, uncensorable, and immune to institutional manipulation, all stock variables must pass through a decentralized verification layer using the D-Trinity structure:
-$V_{stock}(t) = \text{SHA-256}\Big(s_j(t) \parallel \text{Nostr}_{relays} \parallel \text{Hash}_{BTC}(t)\Big)$
-*Where $V_{stock}$ provides the mathematical guarantee of truth for the wellbeing index at time $t$.*
+$$V_{stock}(t) = \text{SHA-256}\Big(s_j(t) \parallel \text{Nostr}_{relays} \parallel \text{Hash}_{BTC}(t)\Big)$$
+Where $$V_{stock}$$ provides the mathematical guarantee of truth for the wellbeing index at time $$t$$.
 
 ---
 
 ## 12. High-Convexity Pricing of Resource Depletion ($C_{PWRS}$)
 To properly penalize the depletion of critical planetary stocks, the framework applies a high-convexity second derivative to energy efficiency, modeling ecological collapse as a financialized tail-risk:
-$C_{PWRS} = \frac{1}{W} \frac{\partial^2 W}{\partial E^2}$
-*This ensures that as energy $E$ usage accelerates towards a planetary boundary, the cost function geometrically explodes.*
+$C_{PWRS} = \frac{1}{W} \frac{\partial^2 W}{\partial E^2}$ 
+*This ensures that as energy E usage accelerates towards a planetary boundary, the cost function geometrically explodes.*
 
 ---
 
