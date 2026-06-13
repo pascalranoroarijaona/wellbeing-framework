@@ -52,9 +52,7 @@
 
 ### **3. Planetary Stock Dynamics**
 - **Model**:
-  $$\
-  \frac{ds_j}{dt} = r_j(s_j) - d_j(q,e) + m_j(\text{management})
-  \$$
+  $frac{ds_j}{dt} = r_j(s_j) - d_j(q,e) + m_j(\text{management})$
 - **Examples**:
   - Fish: logistic growth − catch
   - Soil C: sequestration − erosion
