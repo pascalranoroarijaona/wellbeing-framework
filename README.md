@@ -240,7 +240,7 @@ python wellbeing_pwrs.py
 ---
 
 > **We don’t need more GDP. We need more wellbeing — per kilowatt.**  
-> **#WellbeingFramework #W-PWRS #BeyondGDP**
+> **#ScientificWellbeingFramework #W-PWRS #BeyondGDP**
 
 ---
 
