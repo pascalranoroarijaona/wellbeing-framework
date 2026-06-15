@@ -226,7 +226,7 @@ python wellbeing_pwrs.py
   title = {The Wellbeing Framework: From Human Flourishing to Planetary Resource Stocks},
   year = {2025},
   month = {November},
-  howpublished = {\url{https://github.com/MadaGasBit/wellbeing-framework}},
+  howpublished = {\url{https://github.com/pascalranoroarijaona/wellbeing-framework}},
   note = {Accessed: 2025}
 }
 ```
