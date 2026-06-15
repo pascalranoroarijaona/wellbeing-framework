@@ -243,4 +243,4 @@ python wellbeing_pwrs.py
 **The world will know it as The Wellbeing Framework.**
 **Share the vision. Change the future.**
 
-**#WellbeingFramework | @MadaGasBit | November 11, 2025**
+**#WellbeingFramework | @TheSunStandard | November 11, 2025**
