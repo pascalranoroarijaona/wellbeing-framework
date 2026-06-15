@@ -200,12 +200,12 @@ $C_{PWRS} = \frac{1}{W} \frac{\partial^2 W}{\partial E^2}$
 ## Citation
 
 ```bibtex
-@misc{ranaora2025wellbeing,
-  author       = {Ranaora, Pascal},
+@misc{Ranoroarijaona2025wellbeing,
+  author       = {Ranoroarijaona, Pascal},
   title        = {The Wellbeing Framework: A Planetary Accounting Identity},
   year         = {2025},
   month        = {November},
-  howpublished = {\url{https://github.com/MadaGasBit/wellbeing-framework}},
+  howpublished = {\url{https://github.com/TheSunStandard/wellbeing-framework}},
   note         = {Formulas Glossary: formulas.md}
 }
 
