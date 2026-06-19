@@ -15,14 +15,14 @@
 | Stage | Equation | Year | Core Insight |
 |------|--------|------|-------------|
 | **1. Wellbeing Identity** | $F = P \times \frac{W}{P} \times \frac{E}{W} \times \frac{F}{E}$ | 2025 | Complete/Replace GDP with **WU = wellbeing unit** |
-| **2. WU-GS** | $W = \sum \alpha_i q_i$ | 2025 | Wellbeing = **weighted social goods & services** |
-| **3. WU-GSES** | $W = \sum \alpha q + \sum \beta e$ | 2025-2030 | Add **environmental services** |
-| **4. WU-PWRS** | $W = \sum \alpha q + \sum \beta e + \sum \gamma s$ | 2026 | Add **planetary resource stocks** |
-| **5. WU-PWRS-Dynamics** | $\frac{dW}{dt} = f(q,e,s,\text{depletion})$ | 2026 | Model **stock depletion & regeneration** |
+| **2. WU-GS** | $WU = \sum \alpha_i q_i$ | 2025 | Wellbeing = **weighted social goods & services** |
+| **3. WU-GSES** | $WU = \sum \alpha q + \sum \beta e$ | 2025-2030 | Add **environmental services** |
+| **4. WU-PWRS** | $WU = \sum \alpha q + \sum \beta e + \sum \gamma s$ | 2026 | Add **planetary resource stocks** |
+| **5. WU-PWRS-Dynamics** | $\frac{dWU}{dt} = f(q,e,s,\text{depletion})$ | 2026 | Model **stock depletion & regeneration** |
 | **6. WU-PWRS-S2F** | $S2F_j = \frac{s_j}{\Delta s_{j,\text{anthro}}}$ | **2028** | **Biological Stock-to-Flow Ratio** |
 | **7. WU-PWRS-Sun Standard**| $\Omega = \sum (S2F_j \times \text{seJ}_j)$ | **2034** | Base valuation on **Solar Transformity (Emergy)** |
 | **8. WU-PWRS-Consensus** | $\text{Hash}(S2F_{t}) \to \text{Nostr/Timestamps}$ | **2040** | **Cryptographic state anchoring** of ecology |
-| **9. WU-PWRS-Futures** | The Post-GDP Era | **2044** | Global thermodynamic accounting parity |
+| **9. WU-PWRS-Futures** | The WU Era | **2044** | **Global thermodynamic accounting parity** |
 
 ---
 
