@@ -17,10 +17,10 @@
 | Stage | Equation | Year | Core Insight |
 |------|--------|------|-------------|
 | **1. Wellbeing Identity** | $F = P \times \frac{W}{P} \times \frac{E}{W} \times \frac{F}{E}$ | 2025 | Complete/Replace GDP with **WU = wellbeing unit** |
-| **2. WU-GS** | $WU = \sum \alpha_i q_i$ | 2025 | Wellbeing = **weighted social goods & services** |
-| **3. WU-GSES** | $WU = \sum \alpha q + \sum \beta e$ | 2025-2030 | Add **environmental services** |
-| **4. WU-PWRS** | $WU = \sum \alpha q + \sum \beta e + \sum \gamma s$ | 2026 | Add **planetary resource stocks** |
-| **5. WU-PWRS-Dynamics** | $\frac{dWU}{dt} = f(q,e,s,\text{depletion})$ | 2026 | Model **stock depletion & regeneration** |
+| **2. WU-GS** | $WU = \sum \alpha_i q_i$ | 2026 | Wellbeing = **weighted social goods & services** |
+| **3. WU-GSES** | $WU = \sum \alpha q + \sum \beta e$ | 2026-2030 | Add **environmental services** |
+| **4. WU-PWRS** | $WU = \sum \alpha q + \sum \beta e + \sum \gamma s$ | 2028- | Add **planetary resource stocks** |
+| **5. WU-PWRS-Dynamics** | $\frac{dWU}{dt} = f(q,e,s,\text{depletion})$ | 2028- | Model **stock depletion & regeneration** |
 | **6. WU-PWRS-S2F** | $S2F_j = \frac{s_j}{\Delta s_{j,\text{anthro}}}$ | **2028** | **Biological Stock-to-Flow Ratio** |
 | **7. WU-PWRS-Sun Standard**| $\Omega = \sum (S2F_j \times \text{seJ}_j)$ | **2034** | Base valuation on **Solar Transformity (Emergy)** |
 | **8. WU-PWRS-Consensus** | $\text{Hash}(S2F_{t}) \to \text{Nostr/Timestamps}$ | **2040** | **Cryptographic state anchoring** of ecology |
@@ -32,7 +32,7 @@
 
 To calculate $s$ (planetary stocks) accurately, we cannot rely on centralized fiat estimates. The Framework utilizes a **Giant Open Source Database** tracking the Stock-to-Flow (S2F) ratio of all living species, measured in solar equivalent Joules (seJ). 
 
-A high biological S2F ratio indicates ecological resilience. When a species' S2F ratio drops below thermodynamic replacement levels, the `WU-PWRS` equation triggers automated scarcity alerts.
+A high biological S2F ratio indicates ecological resilience. When a species' S2F ratio falls below the thermodynamic replacement level, the `WU-PWRS` equation triggers automated scarcity alerts.
 
 ### **Multi-Cloud Sovereign Replication**
 To guarantee uptime, prevent state manipulation, and ensure geographic sovereignty, the S2F ledger is replicated across four independent infrastructural zones:
@@ -42,7 +42,7 @@ To guarantee uptime, prevent state manipulation, and ensure geographic sovereign
 4.  **Africa (Teraco/Local Providers):** Anchoring equatorial biodiversity. *Future node architecture includes subterranean data centers where server thermal exhaust is redirected to heat surface-level vertical farms and regenerate local soil biomes.*
 
 ### **Cryptographic Provenance**
-Biological data states are cryptographically signed. The daily Stock-to-Flow state of the biosphere is hashed via SHA-256 and anchored to decentralized networks (via Nostr relays and OpenTimestamps). This creates an immutable, verifiable ledger of planetary health that no single sovereign actor can alter to artificially inflate their National Wellbeing Accounts.
+Biological data states are cryptographically signed. The daily Stock-to-Flow state of the biosphere is hashed via SHA-256 and anchored to decentralized networks (via Nostr relays and OpenTimestamps). This creates an immutable, verifiable ledger of planetary health that no single sovereign actor can alter to inflate their National Wellbeing Accounts artificially.
 
 ---
 
