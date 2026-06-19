@@ -1,5 +1,6 @@
 # **The Wellbeing Framework**
-<img width="461" height="447" alt="WBF-Logo" src="https://github.com/user-attachments/assets/dc4505c0-0c51-4e5b-a562-6621955a531b" />
+<img width="260" height="250" alt="WBF-Logo" src="https://github.com/user-attachments/assets/dc4505c0-0c51-4e5b-a562-6621955a531b" />
+
 ### *From Human Flourishing to Planetary Survival via Thermodynamic Consensus*
 
 ---
