@@ -1,0 +1,48 @@
+name: Compile WU Accounting LaTeX Paper
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'paper/wu_accounting_framework.tex'
+      - '.github/workflows/build-paper.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compile LaTeX to PDF (REVTeX 4.2)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: wu_accounting_framework.tex
+          working_directory: paper
+          latexmk_use_xelatex: false
+          extra_system_packages: |
+            texlive-publishers
+            texlive-science
+            texlive-latex-extra
+            texlive-fonts-recommended
+
+      - name: Generate SHA-256 Provenance Digest
+        working-directory: paper
+        run: |
+          sha256sum wu_accounting_framework.pdf wu_accounting_framework.tex > wu_accounting_framework.sha256
+          cat wu_accounting_framework.sha256
+
+      - name: Commit compiled PDF and SHA-256 back to repo
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add paper/wu_accounting_framework.pdf paper/wu_accounting_framework.sha256
+          git diff --staged --quiet || git commit -m "chore(paper): auto-compile wu_accounting_framework.pdf and update SHA-256 [skip ci]"
+          git push origin main

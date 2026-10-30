@@ -27,7 +27,15 @@
 | **9. WU-PWRS-Futures** | The WU Era | **2044** | **Global thermodynamic accounting parity** |
 
 ---
+## Scientific Manuscript & Cryptographic Provenance
 
+* **Title:** *The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus*
+* **LaTeX Source (REVTeX 4.2):** [`paper/wu_accounting_framework.tex`](paper/wu_accounting_framework.tex)
+* **Compiled Manuscript (PDF):** [`paper/wu_accounting_framework.pdf`](paper/wu_accounting_framework.pdf)
+* **SHA-256 Checksums:** [`paper/wu_accounting_framework.sha256`](paper/wu_accounting_framework.sha256)
+* **Case Study Architecture:** [The Inverted Matrix (*La Matrice Inversée*)](https://www.thesunstandard.net/blog/matrice-inversee.html?lg=EN)
+
+---
 ## **The Global Biological S2F Ledger**
 
 To calculate $s$ (planetary stocks) accurately, we cannot rely on centralized fiat estimates. The Framework utilizes a **Giant Open Source Database** tracking the Stock-to-Flow (S2F) ratio of all living species, measured in solar equivalent Joules (seJ). 
@@ -127,3 +135,4 @@ README.md
 ---
 
 > **We don’t need more GDP. We need more wellbeing — per kilowatt.** > **#HomoBiodiversitas #TheSunStandard #BeyondGDP**
+

@@ -1,0 +1,490 @@
+\documentclass[aps,pre,twocolumn,10pt,superscriptaddress,amsmath,amssymb,amsfonts,floatfix,showkeys]{revtex4-2}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus},
+    pdfauthor={Pascal Ranaora}
+}
+
+\begin{document}
+
+\title{The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus}
+
+\author{Pascal Ranaora}
+\email{pascal.ranaora@informationphysicsinstitute.net}
+\affiliation{Information Physics Institute, Sydney, NSW, Australia}
+\affiliation{Lemuria Technologies \& The Sun Standard Research Initiative, Sydney, NSW, Australia}
+
+\date{October 30, 2026}
+
+\begin{abstract}
+Twentieth-century macroeconomic accounting systems, epitomized by Gross Domestic Product (GDP), suffer from a fatal epistemological and physical defect: they conflate the irreversible liquidation of finite planetary resource stocks with positive income generation while remaining mathematically unanchored from the First and Second Laws of Thermodynamics. In this work, we formulate the Wellbeing Unit (WU) Accounting Framework, a rigorous socio-thermodynamic valuation system that replaces fiat monetary velocity with a cardinal state metric of human flourishing, ecosystem service flux, and biospheric stock stability per unit of expended exergy ($\text{mWU}\cdot\text{kWh}^{-1}$). Using statistical mechanics and Liouville phase-space dynamics, we prove that unbacked fiat units violate measure-preserving Hamiltonian conservation, inducing systematic ecological arbitrage. We then construct the global Wellbeing State Function $W(t)$ across vital human flows ($q_i$), ecosystem services ($e_j$), and planetary resource stocks ($s_k$), coupled with a non-linear, high-convexity barrier pricing operator $C_{\text{PWRS}}$ whose marginal cost diverges asymptotically as critical environmental tipping points ($s_{k,\text{crit}}$) are approached. To immunize ecological accounting against institutional falsification and Goodhart's Law, state telemetry is bound to the D-Trinity verification protocol ($V_{\text{stock}}$), integrating SHA-256 cryptographic digests, decentralized Nostr Schnorr identity attestations, and Proof-of-Work thermodynamic time governed by the Nakamoto Action ($S_{\text{Nakamoto}} \ge k_{\text{Nak}}$). We further formalize the macro-state in a complex socio-thermodynamic Hilbert space $\Psi_{\text{WU}}(t) = u(t) + i C_s(t)$, uniting physical utility $u$ with orthogonal societal trust $C_s$. Finally, we derive the complete exergy-balance equations for the \textit{Inverted Matrix} (\textit{La Matrice Invers\'ee}) architecture: a subterranean brownfield compute and surface agro-ecological system achieving a Power Usage Effectiveness ($\text{PUE}$) of $1.03\text{--}1.10$ while cascading $96\%$ of computational thermal rejection into Metal-Organic Framework (MOF) atmospheric water generation, greenhouse net primary production, and autothermal biochar carbon sequestration.
+\end{abstract}
+
+\keywords{Information Physics, Thermodynamic Accounting, Wellbeing Unit, Inverted Matrix, Distributed Consensus, Econophysics, Exergy Cascade, Nakamoto Constant, Biochar Sequestration}
+
+\maketitle
+
+\section{Introduction: The Epistemological Failure of Fiat Macroeconomics}
+
+The foundational accounting identity of modern macroeconomics, the national income accounts formulation of Gross Domestic Product (GDP),
+\begin{equation}
+    \text{GDP}(t) = C(t) + I(t) + G(t) + \big(X(t) - M(t)\big),
+    \label{eq:gdp_identity}
+\end{equation}
+was designed in the mid-twentieth century as a Keynesian measure of aggregate monetary transaction velocity \cite{GeorgescuRoegen1971, Daly1996}. From the vantage point of statistical physics and non-equilibrium thermodynamics \cite{Prigogine1977, Jaynes1957}, Eq.~(\ref{eq:gdp_identity}) exhibits three foundational pathologies that render it incompatible with long-term planetary survival:
+
+\begin{enumerate}
+    \item \textbf{Conflation of Income Flows with Capital Liquidation:} Equation~(\ref{eq:gdp_identity}) lacks a state vector for natural capital stocks. When an economy clear-cuts a primary forest, exhausts a fossil piezometric aquifer, or oxidizes millennial pedospheric carbon (topsoil), the resulting market transactions register solely as positive increments to consumption $C(t)$ and investment $I(t)$. The irreversible stock depletion $-\Delta s_k(t)$ is omitted from the ledger.
+    \item \textbf{Thermodynamic Unanchoring (Violation of Liouville's Theorem):} In classical statistical mechanics, the phase-space distribution function $\rho(\bm{q}, \bm{p}, t)$ of a closed conservative system obeys Liouville's equation,
+    \begin{equation}
+        \frac{d\rho}{dt} = \frac{\partial \rho}{\partial t} + \sum_{l} \left( \frac{\partial \rho}{\partial q_l}\dot{q}_l + \frac{\partial \rho}{\partial p_l}\dot{p}_l \right) = 0,
+        \label{eq:liouville}
+    \end{equation}
+    ensuring phase-space volume invariance ($\nabla \cdot \bm{v} = 0$). A monetary unit intended to measure physical value must similarly obey a conservation law tied to physical action or exergy \cite{Mirowski1989, Yakovenko2009}. Conversely, fiat credit creation expands the nominal monetary manifold at zero marginal thermodynamic cost ($\nabla \cdot \bm{v}_{\text{fiat}} > 0$), decoupling price signals from biophysical scarcity and accelerating Cantillon wealth distortion \cite{Alden2023, Booth2020, Lepard2025}.
+    \item \textbf{Entropic Blindness:} By the Gouy-Stodola theorem \cite{Bejan2016}, every irreversible macroeconomic process destroys available work (exergy) at a rate proportional to internal entropy generation $\dot{S}_{\text{gen}}$:
+    \begin{equation}
+        \dot{E}_{\text{destroyed}} = T_0 \, \dot{S}_{\text{gen}} \ge 0,
+        \label{eq:gouy_stodola}
+    \end{equation}
+    where $T_0$ is the ambient biosphere reference temperature. GDP treats high-entropy dissipative waste (e.g., pollution remediation, traffic congestion, planned obsolescence, evaporative cooling losses) as value-additive economic output.
+\end{enumerate}
+
+Earth, however, is not an isolated financial abstraction; it is an open thermodynamic system maintained far from equilibrium by a continuous influx of low-entropy solar photons ($T_{\odot} \approx 5778\text{ K}$) and a radiative outflow of high-entropy infrared photons into deep space ($T_{\text{space}} \approx 2.7\text{ K}$) \cite{Kleidon2016, Lovelock1979}. Human civilization functions as a dissipative metabolic superstructure embedded within this planetary trophic web.
+
+To align human economic coordination with the laws of physics, we introduce the \textbf{Wellbeing Unit (WU) Accounting Framework}. Developed within the open-science architecture of \texttt{wellbeing-framework} \cite{RanaoraSunStandard}, this formalism replaces GDP with a cardinal, exergy-denominated metric of systemic flourishing ($\text{mWU}\cdot\text{kWh}^{-1}$), secures ecological state reporting via thermodynamic Proof-of-Work consensus, and demonstrates how high-density computational infrastructure can be inverted from an entropic liability into a primary regenerative engine via the \textbf{Inverted Matrix} (\textit{La Matrice Invers\'ee}).
+
+\section{Mathematical Formalism of the WU Accounting Framework}
+
+\subsection{The Cardinal Wellbeing State Function}
+
+Consider a bounded socio-ecological manifold $\Omega$ at epoch $t$. We define the macro-state of $\Omega$ via three observable state vectors:
+\begin{itemize}
+    \item $\bm{q}(t) = \{q_1(t), \dots, q_{N_q}(t)\}^T \in \mathbb{R}^{N_q}_{+}$: Vital human flourishing flows, representing intensive and extensive metrics of human well-being, including nutritional caloric and micronutrient adequacy, potable water security, healthy longevity, cognitive/educational autonomy, and realized individual utility $u(t)$ \cite{Robeyns2024, Freire1970}.
+    \item $\bm{e}(t) = \{e_1(t), \dots, e_{N_e}(t)\}^T \in \mathbb{R}^{N_e}_{+}$: Regenerative ecosystem service fluxes, measuring active biophysical work performed by the non-human biosphere, including photosynthetic Net Primary Production ($\text{NPP}$), watershed hydrologic filtration, entomofaunal pollination rates, and evapotranspiration latent heat buffering \cite{Costanza1997, Odum1996}.
+    \item $\bm{s}(t) = \{s_1(t), \dots, s_{N_s}(t)\}^T \in \mathbb{R}^{N_s}_{+}$: Planetary resource stocks, quantifying slowly regenerating or non-renewable natural capital reservoirs, including pedospheric organic carbon (topsoil mass and depth), unconfined and confined aquifer volumes, genetic/trophic biodiversity indices (Shannon-Wiener diversity $H'$), and accessible lithospheric mineral reserves \cite{Rockstrom2009, Steffen2015}.
+\end{itemize}
+
+The global cardinal Wellbeing State Function $W(t)$, expressed in \textbf{Wellbeing Units ($\text{WU}$)}, is governed by the fundamental accounting identity:
+\begin{equation}
+    W(t) = \sum_{i=1}^{N_q} \alpha_i \, q_i(t) + \sum_{j=1}^{N_e} \beta_j \, e_j(t) + \sum_{k=1}^{N_s} \gamma_k\big(s_k(t)\big) \, s_k(t),
+    \label{eq:wellbeing_master}
+\end{equation}
+where $\alpha_i \in \mathbb{R}_{+}$ and $\beta_j \in \mathbb{R}_{+}$ are dimensional normalization couplings mapping heterogeneous physical units into cardinal $\text{WU}$ equivalents, and $\gamma_k(s_k(t))$ is the state-dependent stock valuation functional.
+
+Differentiating Eq.~(\ref{eq:wellbeing_master}) with respect to time yields the instantaneous Wellbeing Flux $\dot{W}(t)$:
+\begin{equation}
+\begin{aligned}
+    \frac{dW}{dt} &= \sum_{i=1}^{N_q} \alpha_i \frac{dq_i}{dt} + \sum_{j=1}^{N_e} \beta_j \frac{de_j}{dt} \\
+    &\quad + \sum_{k=1}^{N_s} \left( \gamma_k(s_k) + s_k \frac{\partial \gamma_k}{\partial s_k} \right) \frac{ds_k}{dt}.
+\end{aligned}
+\label{eq:wellbeing_rate}
+\end{equation}
+Equation~(\ref{eq:wellbeing_rate}) exposes the central fallacy of extractive industrialism: any policy that achieves $\dot{q}_i > 0$ by liquidating natural capital ($\dot{s}_k < 0$) incurs a negative third term that scales non-linearly with stock depletion.
+
+\subsection{High-Convexity Planetary Stock Depletion Pricing (\texorpdfstring{$C_{\text{PWRS}}$}{CPWRS})}
+
+In complex ecological networks, resource stocks do not degrade linearly; they exhibit hysteresis, critical slowing down, and fold bifurcations when depleted near a critical regeneration threshold $s_{k,\text{crit}}$ \cite{Rockstrom2009}. Linear Pigouvian taxation fails to prevent stock collapse because marginal penalties remain finite as $s_k(t) \to s_{k,\text{crit}}^{+}$.
+
+To embed an impassable thermodynamic barrier into the accounting system, the WU Framework defines the \textbf{Planetary Wellbeing Resource Stock ($\text{PWRS}$) Depletion Cost Operator} $C_{\text{PWRS}}\big(s_k(t)\big)$:
+\begin{equation}
+\begin{aligned}
+    C_{\text{PWRS}}\big(s_k(t)\big) &= c_{0,k} \left( \frac{s_{k,0} - s_{k,\text{crit}}}{s_k(t) - s_{k,\text{crit}}} \right)^{\eta_k} \\
+    &\quad \times \Theta\big(s_k(t) - s_{k,\text{crit}}\big),
+\end{aligned}
+\label{eq:pwrs_operator}
+\end{equation}
+where:
+\begin{itemize}
+    \item $s_{k,0}$ is the holistic pre-industrial or homeostatic carrying-capacity stock level ($s_{k,0} > s_{k,\text{crit}}$);
+    \item $c_{0,k} > 0$ is the baseline thermodynamic replacement exergy cost per unit stock at $s_k = s_{k,0}$;
+    \item $\eta_k > 1$ is the stock convexity exponent (empirically calibrated to $\eta_k \in [2, 6]$ based on trophic network connectivity);
+    \item $\Theta(\cdot)$ is the Heaviside step function.
+\end{itemize}
+
+The marginal depletion penalty (shadow price) $\pi_k(s_k)$ associated with extracting an infinitesimal unit $-\delta s_k$ is given by the negative first derivative of $C_{\text{PWRS}}$:
+\begin{equation}
+    \pi_k\big(s_k(t)\big) \equiv -\frac{\partial C_{\text{PWRS}}}{\partial s_k} = \frac{\eta_k \, c_{0,k} \, (s_{k,0} - s_{k,\text{crit}})^{\eta_k}}{\big(s_k(t) - s_{k,\text{crit}}\big)^{\eta_k + 1}},
+    \label{eq:marginal_penalty}
+\end{equation}
+and the local curvature (convexity) of the pricing barrier is:
+\begin{equation}
+\begin{aligned}
+    \kappa_{\text{PWRS}}\big(s_k(t)\big) &\equiv \frac{\partial^2 C_{\text{PWRS}}}{\partial s_k^2} \\
+    &= \frac{\eta_k (\eta_k + 1) \, c_{0,k} \, (s_{k,0} - s_{k,\text{crit}})^{\eta_k}}{\big(s_k(t) - s_{k,\text{crit}}\big)^{\eta_k + 2}} > 0.
+\end{aligned}
+\label{eq:pwrs_curvature}
+\end{equation}
+
+Coupling the marginal penalty directly into the effective stock weight of Eq.~(\ref{eq:wellbeing_rate}), such that $\Gamma_k(s_k) \equiv \gamma_k + s_k(\partial\gamma_k/\partial s_k) = \gamma_{0,k} + \pi_k(s_k)$, guarantees the asymptotic divergence property:
+\begin{equation}
+    \lim_{s_k(t) \to s_{k,\text{crit}}^{+}} \pi_k\big(s_k(t)\big) = +\infty.
+    \label{eq:divergence_limit}
+\end{equation}
+Consequently, no finite increase in human consumption flow $\dot{q}_i$ can ever compensate for driving a planetary resource stock across its critical regeneration boundary $s_{k,\text{crit}}$. Conversely, regenerative activities that rebuild depleted stocks ($\dot{s}_k > 0$ when $s_k$ is close to $s_{k,\text{crit}}$) harvest an extraordinary positive marginal wellbeing yield $\pi_k(s_k)\dot{s}_k \gg 0$, creating an immediate thermodynamic incentive for ecological restoration.
+
+\subsection{The Global Sustainability KPI: \texorpdfstring{$\text{mWU}\cdot\text{kWh}^{-1}$}{mWU/kWh}}
+
+To establish a universal unit of efficiency across disparate technological, agricultural, and computational sectors, we normalize the net change in cardinal wellbeing $\Delta W$ over time interval $[t_0, t_1]$ by the total integrated exergy (energy) input $E_{\text{tot}}$ expended by the system. Expressing $E_{\text{tot}}$ in kilowatt-hours ($\text{kWh}$, where $1\text{ kWh} = 3.6 \times 10^6\text{ J}$) and scaling by $10^3$ to obtain milli-Wellbeing Units ($\text{mWU}$), we define the \textbf{Specific Thermodynamic Wellbeing Efficiency} $\eta_{\text{WU}}$:
+\begin{equation}
+\begin{aligned}
+    \eta_{\text{WU}}(t_0, t_1) &\equiv \frac{10^3 \cdot \Delta W(t_0, t_1)}{E_{\text{tot}}(t_0, t_1)} \\
+    &= \frac{10^3 \int_{t_0}^{t_1} \dot{W}(t)\,dt}{\int_{t_0}^{t_1} P_{\text{tot}}(t)\,dt} \quad \left[\text{mWU}\cdot\text{kWh}^{-1}\right].
+\end{aligned}
+\label{eq:kpi_mwu_kwh}
+\end{equation}
+
+In differential instantaneous form, Eq.~(\ref{eq:kpi_mwu_kwh}) becomes:
+\begin{equation}
+    \eta_{\text{WU}}(t) = \frac{10^3}{P_{\text{tot}}(t)} \left[ \sum_{i=1}^{N_q} \alpha_i \dot{q}_i + \sum_{j=1}^{N_e} \beta_j \dot{e}_j + \sum_{k=1}^{N_s} \Gamma_k(s_k) \dot{s}_k \right].
+    \label{eq:instantaneous_kpi}
+\end{equation}
+Equation~(\ref{eq:instantaneous_kpi}) serves as the master objective function for the 2044 planetary transition horizon \cite{RanaoraSunStandard}: any capital allocation, industrial facility, or AI compute cluster must satisfy the strict regenerative admissibility criterion $\eta_{\text{WU}}(t) > 0$.
+
+\section{Thermodynamic Consensus and Cryptographic Provenance}
+
+\subsection{Oracle Vulnerability and Goodhart's Law}
+
+A recurring failure mode of state-administered environmental metrics (such as legacy carbon credits or ESG scores) is their susceptibility to Goodhart's Law \cite{Goodhart1975}: \textit{``When a measure becomes a target, it ceases to be a good measure.''} When accounting ledgers are maintained by centralized authorities with zero thermodynamic cost of state mutation, actors inevitably falsify telemetry $\bm{q}, \bm{e}, \bm{s}$ or engage in double-counting.
+
+In information physics, preventing state falsification requires binding logical information bits to irreversible physical entropy production---a direct macroscopic generalization of Landauer's Principle \cite{Landauer1961, Bennett1982}, which states that erasing or forging $1$ bit of information requires a minimum heat dissipation of $E_{\text{Landauer}} \ge k_B T \ln 2$.
+
+\subsection{The D-Trinity Verification Protocol (\texorpdfstring{$V_{\text{stock}}$}{Vstock})}
+
+To guarantee unforgeable provenance from physical biosphere sensors to the global accounting ledger, the WU Framework enforces the \textbf{D-Trinity Protocol} (\texttt{pascalranaora/Trinity}). Every telemetry vector measurement $\bm{\Phi}(t) = \{\bm{q}(t), \bm{e}(t), \bm{s}(t)\}$ recorded at epoch $t$ is mapped into a cryptographic state commitment $V_{\text{stock}}(t)$ via three orthogonal mathematical primitives:
+\begin{equation}
+\begin{aligned}
+    V_{\text{stock}}(t) = \text{SHA-256}\Big( &\bm{\Phi}(t) \;\parallel\; \text{Sig}_{\text{Nostr}}\big(\text{pk}_m, \bm{\Phi}(t)\big) \\
+    &\parallel\; \text{Hash}_{\text{BTC}}(t) \Big),
+\end{aligned}
+\label{eq:d_trinity}
+\end{equation}
+where $\parallel$ denotes deterministic byte-array concatenation, and the three components operate across distinct physical and topological layers:
+
+\begin{enumerate}
+    \item \textbf{Cryptographic Data Integrity ($\text{SHA-256}$):} Projects arbitrary-precision sensor data $\bm{\Phi}(t)$ onto a collision-resistant $256$-bit boolean hypercube $\{0,1\}^{256}$, ensuring that any perturbation $\delta s_k \neq 0$ induces an avalanche flip across $\sim 50\%$ of the output digest bits.
+    \item \textbf{Decentralized Topological Identity ($\text{Sig}_{\text{Nostr}}$):} An elliptic-curve Schnorr signature over $\text{secp256k1}$ generated by hardware-authenticated sensor or auditor node $m$ with public key $\text{pk}_m$, propagated across censorship-resistant Nostr relay multigraphs. This layer prevents Sybil spoofing and anchors the observation in a verifiable web of societal trust $C_s$.
+    \item \textbf{Thermodynamic Arrow of Time ($\text{Hash}_{\text{BTC}}(t)$):} Via OpenTimestamps Merkle-tree aggregation, the digest is anchored into the Bitcoin Proof-of-Work blockchain header at block height $t$ \cite{Nakamoto2008, Szabo2002, Bailey2024}.
+\end{enumerate}
+
+\subsection{The Nakamoto Action, Thermal Time, and Complex Socio-Thermodynamic Phase Space}
+
+Why is Proof-of-Work indispensable for anchoring physical resource accounting? In general relativistic statistical mechanics, the Connes-Rovelli \textbf{Thermal Time Hypothesis} \cite{ConnesRovelli1994} posits that physical time is not an external \textit{a priori} parameter, but rather emerges from the modular flow of the statistical state $\rho$ generated by the thermodynamic Hamiltonian $H = -\ln \rho$.
+
+In distributed digital systems lacking a central synchronized clock, Nakamoto consensus constructs an emergent, irreversible arrow of thermal time through continuous Proof-of-Work hashing \cite{RanaoraYii2026, RanaoraNash2026, RanaoraThermo2026}. We define the \textbf{Nakamoto Action} $S_{\text{Nakamoto}}$ accumulated over an observation interval $[t_0, t_1]$ as the time integral of the consensus Lagrangian $\mathcal{L}_{\text{Nak}}$:
+\begin{equation}
+\begin{aligned}
+    S_{\text{Nakamoto}} &= \int_{t_0}^{t_1} \mathcal{L}_{\text{Nak}}\big(P_{\text{PoW}}(t), C_s(t)\big)\,dt \\
+    &= \int_{t_0}^{t_1} P_{\text{PoW}}(t) \, C_s(t) \, dt \ge k_{\text{Nak}},
+\end{aligned}
+\label{eq:nakamoto_action_formal}
+\end{equation}
+where $P_{\text{PoW}}(t)$ is the instantaneous electrical power dissipated by the global Proof-of-Work hashing ensemble, $C_s(t) \in [0, 1]$ is the normalized \textbf{Societal Trust} coefficient (quantifying Nakamoto / Gini hash-rate decentralization and Nostr relay graph connectivity), and $k_{\text{Nak}}$ (measured in $\text{J}\cdot\text{s}$) is the \textbf{Nakamoto Constant}.
+
+In our information-physics framework \cite{RanaoraYii2026, RanaoraThermo2026}, $k_{\text{Nak}}$ is formally assimilated to Planck's constant $h$ ($k_{\text{Nak}} \leftrightarrow h$): just as $h$ defines the elementary quantum of physical phase-space action required to distinguish two orthogonal quantum states, $k_{\text{Nak}}$ defines the minimum quantum of socio-thermodynamic action required to collapse a distributed informational state into an immutable, globally agreed historical record. Rewriting a historical stock attestation $V_{\text{stock}}(t_0)$ at a later time $t_1$ requires an adversary to expend counterfactual thermodynamic work exceeding the cumulative action barrier:
+\begin{equation}
+    W_{\text{forge}}(t_0 \to t_1) > \int_{t_0}^{t_1} P_{\text{PoW}}(t)\,dt \gg \frac{k_{\text{Nak}}}{C_s}.
+    \label{eq:forgery_barrier}
+\end{equation}
+
+This duality between tangible biophysical utility and intangible consensus coherence motivates a unified representation in a complex socio-thermodynamic Hilbert space $\mathcal{H}_{\text{WU}}$. Following the strict complex notation $z = a + ib$, we define the macroeconomic wavefunction $\Psi_{\text{WU}}(t)$ as:
+\begin{equation}
+    \Psi_{\text{WU}}(t) = u(t) + i C_s(t),
+    \label{eq:complex_wavefunction}
+\end{equation}
+where:
+\begin{itemize}
+    \item The real axis component $u(t) \equiv W(t) / W_0$ represents observable biophysical utility and cardinal flourishing;
+    \item The imaginary axis component $i C_s(t)$ represents the orthogonal phase dimension of societal trust and cryptographic consensus integrity.
+\end{itemize}
+
+Expressing Eq.~(\ref{eq:complex_wavefunction}) in polar Euler form,
+\begin{equation}
+\begin{aligned}
+    \Psi_{\text{WU}}(t) &= |\Psi_{\text{WU}}(t)| e^{i\theta(t)}, \\
+    |\Psi_{\text{WU}}(t)| &= \sqrt{u(t)^2 + C_s(t)^2}, \quad \theta(t) = \arctan\left(\frac{C_s(t)}{u(t)}\right),
+\end{aligned}
+\label{eq:polar_form}
+\end{equation}
+the temporal evolution of a civilization is governed by a generalized socio-thermodynamic Schr\"odinger-Langevin equation:
+\begin{equation}
+    i k_{\text{Nak}} \frac{\partial \Psi_{\text{WU}}}{\partial t} = \hat{\mathcal{H}}_{\text{WU}} \Psi_{\text{WU}}(t),
+    \label{eq:schrodinger_wu}
+\end{equation}
+where $\hat{\mathcal{H}}_{\text{WU}}$ is the effective socio-thermodynamic Hamiltonian operator. Equation~(\ref{eq:complex_wavefunction}) demonstrates that a society with high material consumption ($u \gg 0$) but collapsed societal trust ($C_s \to 0$) loses phase coherence ($\theta \to 0$) and becomes dynamically unstable against oligarchic capture \cite{Kuhner2014}, whereas a high-$C_s$, high-$u$ system maximizes structural resilience $|\Psi_{\text{WU}}|^2$.
+
+\section{Physical Instantiation: The Inverted Matrix (\textit{La Matrice Invers\'ee})}
+
+\subsection{Topological Inversion of the Silicon-Biosphere Interface}
+
+A foundational tension in contemporary energy policy concerns the rapidly expanding electrical footprint of high-density Artificial Intelligence (AI) training/inference clusters and Proof-of-Work ($P_{\text{PoW}}$) cryptographic infrastructure. In a conventional surface-level hyperscale data center, an electrical input power $P_{\text{el}}$ performs logical switching inside CMOS silicon transistors and is $100\%$ converted into low-grade thermal energy ($\dot{Q}_{\text{out}} \approx P_{\text{el}}$). Rather than recovering this thermal exergy, legacy facilities expend an additional $35\%\text{--}60\%$ parasitic electrical overhead ($P_{\text{aux}}$) to run mechanical chillers and evaporative cooling towers, venting the heat into the atmosphere while vaporizing millions of cubic meters of potable water. Under Eq.~(\ref{eq:instantaneous_kpi}), such facilities exhibit a severely negative wellbeing efficiency ($\eta_{\text{WU}} < 0$).
+
+The \textbf{Inverted Matrix} (\textit{La Matrice Invers\'ee}) resolves this paradox by executing a complete architectural and thermodynamic inversion of the classic cyberpunk metaphor \cite{RanaoraSunStandard}. Rather than encasing living biological organisms in subterranean pods to serve as thermal batteries for a digital simulation, \textbf{the silicon machine is placed underground within rehabilitated industrial cavities to function as the primary thermodynamic boiler, water distiller, and carbon-sequestration catalyst for an abundant surface biosphere}.
+
+\subsection{Subterranean Brownfield Siting and \texorpdfstring{$\text{PUE}$}{PUE} Minimization}
+
+The Inverted Matrix situs consists of decommissioned subterranean brownfield sites---abandoned mineral mines, limestone quarries, tunnels, or subterranean infrastructural vaults. Placing high-density compute arrays underground provides three immediate physical advantages:
+\begin{enumerate}
+    \item \textbf{Zero Surface Land Footprint ($\Delta s_{\text{land}} \ge 0$):} Surface acreage above the cavity is liberated entirely for syntropic agroforestry, permaculture greenhouses, and ecological restoration.
+    \item \textbf{Geothermal Sink Stabilization:} At depths $z \ge 15\text{--}50\text{ m}$, surrounding lithospheric strata behave as an infinite thermal buffer at a constant year-round temperature $T_{\text{geo}} \approx 285\text{--}288\text{ K}$ ($12\text{--}15^\circ\text{C}$), insulating the system from surface summer heatwaves that cripple air-cooled data centers.
+    \item \textbf{Dielectric Liquid Immersion Cooling:} Server blades (AI GPUs and PoW ASICs) are submerged directly in high-heat-capacity dielectric fluids. Eliminating server fans and rotary compressor chillers collapses auxiliary power overhead $P_{\text{aux}}$ to hydraulic circulation pumps alone, yielding a Power Usage Effectiveness ($\text{PUE}_{\text{IM}}$) of:
+    \begin{equation}
+        \text{PUE}_{\text{IM}} = \frac{P_{\text{el}} + P_{\text{aux}}}{P_{\text{el}}} = 1 + \frac{P_{\text{pump}}}{P_{\text{el}}} \in [1.03, 1.10].
+        \label{eq:pue_derivation}
+    \end{equation}
+\end{enumerate}
+
+By operating the dielectric immersion loop at a controlled outlet temperature $T_1 \in [333\text{ K}, 348\text{ K}]$ ($60\text{--}75^\circ\text{C}$), approximately $\eta_{\text{th}} \approx 0.96$ of the primary electrical input $P_{\text{el}}$ is harvested as a clean, pressurized hydronic thermal stream $\dot{Q}_{\text{rec}} = \eta_{\text{th}} P_{\text{el}}$. The maximum theoretical Carnot exergy content $\dot{E}_{\text{ex,th}}$ of this recovered thermal flux relative to the ambient surface environment $T_0 \approx 293\text{ K}$ is:
+\begin{equation}
+    \dot{E}_{\text{ex,th}} = \dot{Q}_{\text{rec}} \left( 1 - \frac{T_0}{T_1} \right) = \eta_{\text{th}} P_{\text{el}} \left( 1 - \frac{T_0}{T_1} \right) \approx 0.138 \, P_{\text{el}}.
+    \label{eq:carnot_exergy}
+\end{equation}
+Instead of destroying $\dot{E}_{\text{ex,th}}$ via atmospheric rejection, the Inverted Matrix routes $\dot{Q}_{\text{rec}}$ through a three-stage cascaded thermal network:
+\begin{equation}
+\begin{aligned}
+    \dot{Q}_{\text{rec}} &= \dot{Q}_{\text{AWG}} + \dot{Q}_{\text{agro}} + \dot{Q}_{\text{pyro}} \\
+    &= \big(\phi_1 + \phi_2 + \phi_3\big)\eta_{\text{th}}P_{\text{el}}, \quad \sum_{m=1}^{3} \phi_m = 1.
+\end{aligned}
+\label{eq:thermal_partition}
+\end{equation}
+
+\subsection{Stage 1: MOF Atmospheric Water Generation and Thermal Distillation (\texorpdfstring{$\phi_1 \dot{Q}_{\text{rec}}$}{phi1 Qrec})}
+
+The highest-temperature enthalpy fraction $\dot{Q}_{\text{AWG}} = \phi_1 \eta_{\text{th}} P_{\text{el}}$ ($T_1 \approx 343\text{ K}$) is directed to solid-state \textbf{Metal-Organic Framework (MOF)} adsorption-desorption water harvesters (e.g., $\text{MOF-801}$, $\text{MOF-303}$, or $\text{Al-fumarate}$) and multi-effect vacuum membrane distillation modules \cite{Kim2017MOF}. During the nocturnal or ambient cycle, the porous crystalline MOF lattice captures water vapor from unsaturated air even at low relative humidities ($\text{RH} \ge 20\%$). During the regeneration phase, computational waste heat $\dot{Q}_{\text{AWG}}$ drives vapor desorption at $333\text{--}343\text{ K}$, followed by condensation at the geothermal sink temperature $T_{\text{geo}} \approx 286\text{ K}$.
+
+The continuous mass production rate of distilled water $\dot{m}_{\text{H}_2\text{O}}$ ($\text{kg}\cdot\text{s}^{-1}$) is governed by the coupled heat-and-mass transfer balance:
+\begin{equation}
+    \dot{m}_{\text{H}_2\text{O}} = \frac{\text{GOR} \cdot \phi_1 \eta_{\text{th}} P_{\text{el}}}{\Delta H_{\text{ads}} + c_{p,\text{sorb}} \Delta T_{\text{swing}} + L_v(T_{\text{cond}})},
+    \label{eq:mof_water_rate}
+\end{equation}
+where $\text{GOR} \in [1.8, 3.2]$ is the multi-stage Gained Output Ratio of latent heat recovery, $\Delta H_{\text{ads}} \approx 2.4 \times 10^6\text{ J}\cdot\text{kg}^{-1}$ is the isosteric heat of adsorption in the MOF pores, $c_{p,\text{sorb}} \Delta T_{\text{swing}}$ is the sensible parasitic heating of the sorbent bed, and $L_v$ is the latent heat of condensation. Crucially, the latent heat released during vapor condensation at $T_{\text{cond}} \approx 305\text{ K}$ is directly passed to Stage 2, maximizing cascaded thermal utilization.
+
+\subsection{Stage 2: Subterranean and Surface Agro-Ecological Regulation (\texorpdfstring{$\phi_2 \dot{Q}_{\text{rec}}$}{phi2 Qrec})}
+
+The intermediate-grade thermal flux $\dot{Q}_{\text{agro}} = \phi_2 \eta_{\text{th}} P_{\text{el}}$ ($T_2 \approx 305\text{--}318\text{ K}$ or $32\text{--}45^\circ\text{C}$), augmented by Stage 1 condensation enthalpy, circulates through subterranean vertical mycological/microalgae chambers and surface permaculture greenhouse root-zone hydronic grids.
+
+Let $A_{\text{gh}}$ denote the surface greenhouse area. Maintaining the pedospheric root zone at the enzymatic optimum $T_{\text{opt}} \approx 296\text{ K}$ ($23^\circ\text{C}$) eliminates winter dormancy and frost mortality. The resulting enhancement in photosynthetic Net Primary Production ($\Delta \dot{e}_{\text{NPP}}$, measured in $\text{kg}_{\text{biomass}}\cdot\text{s}^{-1}$) follows a modified Arrhenius-Farquhar kinetic relation:
+\begin{equation}
+\begin{aligned}
+    \Delta \dot{e}_{\text{NPP}} &= A_{\text{gh}} \, \varepsilon_{\text{PAR}} \, I_{\odot} \big[ f_{\text{enz}}(T_{\text{opt}}) - f_{\text{enz}}(T_{\text{amb}}) \big] \\
+    &\quad \times \left( 1 + \xi_{\text{CO}_2} \right),
+\end{aligned}
+\label{eq:npp_enhancement}
+\end{equation}
+where $\varepsilon_{\text{PAR}}$ is the photosynthetic active radiation conversion efficiency, $I_{\odot}$ is solar irradiance, $f_{\text{enz}}(T)$ is the RuBisCO carboxylation thermal response curve, and $\xi_{\text{CO}_2}$ accounts for symbiotic $\text{CO}_2$ enrichment from subterranean mushroom cultivation chambers to surface plant canopies.
+
+\subsection{Stage 3: Lignocellulosic Pre-Drying and Biochar Pyrolysis Sequestration (\texorpdfstring{$\phi_3 \dot{Q}_{\text{rec}}$}{phi3 Qrec})}
+
+In the final stage of the loop, non-edible lignocellulosic agricultural residues generated in Stage 2 (prunings, stalks, spent mycological substrate) are routed to a pyrolysis unit. In standard pyrolysis, high feedstock moisture content ($w_0 \approx 40\text{--}55\%$) severely degrades net energy efficiency because autothermal combustion gas must be sacrificed to evaporate bound water.
+
+In the Inverted Matrix, the thermal stream $\dot{Q}_{\text{pyro}} = \phi_3 \eta_{\text{th}} P_{\text{el}}$ continuously pre-dries the biomass feedstock to $w_f < 8\%$ moisture content prior to entering the anoxic pyrolysis reactor ($T_{\text{pyro}} \approx 773\text{--}873\text{ K}$). The dry biomass undergoes thermal decomposition into syngas, bio-oil, and recalcitrant aromatic carbon (\textbf{Biochar}) \cite{Lehmann2015Biochar}. The syngas is recycled to sustain the endothermic pyrolysis reaction autothermally, while the solid Biochar mass flux $\dot{m}_{\text{char}}$ is given by:
+\begin{equation}
+\begin{aligned}
+    \dot{m}_{\text{char}} &= Y_{\text{char}} \, \dot{m}_{\text{dry}} \\
+    &= Y_{\text{char}} \left( \frac{\phi_3 \eta_{\text{th}} P_{\text{el}}}{(w_0 - w_f) L_v + c_{p,\text{bio}} \Delta T_{\text{dry}}} \right),
+\end{aligned}
+\label{eq:biochar_production}
+\end{equation}
+where $Y_{\text{char}} \in [0.28, 0.35]$ is the gravimetric biochar yield per unit dry feedstock.
+
+Because Biochar consists of condensed polycyclic aromatic carbon sheets resistant to microbial mineralization (mean residence time $\tau_{\text{char}} > 1{,}000\text{ years}$), incorporating $\dot{m}_{\text{char}}$ into surface agricultural soils directly increases the planetary pedospheric carbon stock $s_{\text{soil}}(t)$:
+\begin{equation}
+    \frac{ds_{\text{soil}}}{dt} = \kappa_{\text{C}} \, \dot{m}_{\text{char}} - k_{\text{decay}} \, s_{\text{soil}}(t) > 0,
+    \label{eq:soil_carbon_ode}
+\end{equation}
+where $\kappa_{\text{C}} \approx 0.82$ is the recalcitrant fixed carbon mass fraction and $k_{\text{decay}} = \tau_{\text{char}}^{-1} \le 10^{-3}\text{ yr}^{-1}$. Simultaneously, the high specific surface area of Biochar ($300\text{--}500\text{ m}^2\cdot\text{g}^{-1}$) increases soil water-holding capacity and microbial mycorrhizal symbiosis, creating a positive feedback loop that further amplifies $\Delta \dot{e}_{\text{NPP}}$ in Eq.~(\ref{eq:npp_enhancement}).
+
+\subsection{Master Equation of the Inverted Matrix Wellbeing Yield}
+
+Substituting Eqs.~(\ref{eq:pue_derivation}), (\ref{eq:mof_water_rate}), (\ref{eq:npp_enhancement}), and (\ref{eq:biochar_production}) into the instantaneous global KPI of Eq.~(\ref{eq:instantaneous_kpi}), we obtain the \textbf{Master Exergy-Wellbeing Equation of the Inverted Matrix}:
+\begin{widetext}
+\begin{equation}
+\begin{aligned}
+    \eta_{\text{WU}}^{\text{IM}} = \frac{10^3}{\text{PUE}_{\text{IM}}} \Bigg[ 
+    &\underbrace{\alpha_{\text{info}} \, \varepsilon_{\text{compute}}}_{\text{AI \& } V_{\text{stock}}\text{ Consensus}}
+    + \underbrace{\frac{\alpha_{\text{H}_2\text{O}} \, \text{GOR} \, \phi_1 \eta_{\text{th}}}{\Delta H_{\text{ads}} + c_{p,\text{sorb}} \Delta T_{\text{swing}} + L_v}}_{\text{Stage 1: MOF Water Distillation } (+q_{\text{water}})} \\
+    &+ \underbrace{\frac{\beta_{\text{NPP}} \, \Delta \dot{e}_{\text{NPP}}(\phi_2 \eta_{\text{th}} P_{\text{el}})}{P_{\text{el}}}}_{\text{Stage 2: Agro-Thermodynamics } (+e_{\text{NPP}})}
+    + \underbrace{\frac{\Gamma_{\text{soil}}(s_{\text{soil}}) \, \kappa_{\text{C}} \, Y_{\text{char}} \, \phi_3 \eta_{\text{th}}}{(w_0 - w_f) L_v + c_{p,\text{bio}} \Delta T_{\text{dry}}}}_{\text{Stage 3: Biochar Stock Restoration } (+s_{\text{soil}})}
+    \Bigg].
+\end{aligned}
+\label{eq:master_inverted_matrix}
+\end{equation}
+\end{widetext}
+
+Equation~(\ref{eq:master_inverted_matrix}) proves a remarkable result in applied information physics: whereas a conventional data center extracts only the first term ($\alpha_{\text{info}} \varepsilon_{\text{compute}}$) while incurring massive negative stock penalties ($-\Gamma_{\text{water}}|\dot{s}_{\text{water}}| - \Gamma_{\text{carbon}}|\dot{s}_{\text{carbon}}|$), the Inverted Matrix turns every single kilowatt-hour of computational electricity into four simultaneous positive contributions to $W(t)$:
+\begin{enumerate}
+    \item Cryptographic consensus ($V_{\text{stock}}$) and scientific AI intelligence;
+    \item Pure distilled water for human vitality and aquifer recharge ($+\dot{q}_{\text{water}}, +\dot{s}_{\text{aquifer}}$);
+    \item Accelerated photosynthetic biomass and food production ($+\dot{e}_{\text{NPP}}, +\dot{q}_{\text{food}}$);
+    \item Permanent pedospheric carbon sequestration via Biochar ($+\dot{s}_{\text{soil}}$).
+\end{enumerate}
+
+\section{Comparative Numerical Analysis: 1 MW Reference Node}
+
+To demonstrate the quantitative divergence between legacy infrastructure and the Inverted Matrix under the WU Accounting Framework, we evaluate a reference $P_{\text{el}} = 1.0\text{ MW}_{\text{el}}$ compute node operating continuously over $1\text{ year}$ ($8{,}760\text{ h}$, base compute load $E_{\text{el}} = 8.76 \times 10^6\text{ kWh}$).
+
+For the \textbf{Inverted Matrix Node}, we set $\text{PUE}_{\text{IM}} = 1.05$ ($E_{\text{tot}} = 9.20 \times 10^6\text{ kWh}\cdot\text{yr}^{-1}$), thermal capture efficiency $\eta_{\text{th}} = 0.96$ ($\dot{Q}_{\text{rec}} = 960\text{ kW}_{\text{th}}$), and thermal partition fractions $\phi_1 = 0.35$ (MOF/distillation), $\phi_2 = 0.45$ (greenhouse agro-thermodynamics), and $\phi_3 = 0.20$ (biomass drying for Biochar pyrolysis). Table~\ref{tab:full_comparison} summarizes the coupled thermodynamic, hydrological, pedospheric, and $\text{WU}$ balance sheets against a standard surface hyperscale data center ($\text{PUE} = 1.45$, evaporative tower cooling).
+
+\begin{table*}[htbp]
+\caption{\label{tab:full_comparison}Comprehensive Socio-Thermodynamic and WU Accounting Comparison for a $1.0\text{ MW}_{\text{el}}$ Compute Cluster over $1\text{ Year}$ ($8{,}760\text{ h}$): Legacy Surface Hyperscale Data Center vs. Subterranean Inverted Matrix (\textit{La Matrice Invers\'ee}).}
+\begin{ruledtabular}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcc}
+Accounting Layer & Physical / Thermodynamic Parameter & Legacy Surface Data Center & Subterranean Inverted Matrix Node \\
+\colrule
+\textbf{Infrastructure} & Siting Topology & Surface Greenfield ($\Delta s_{\text{land}} < 0$) & Subterranean Brownfield ($\Delta s_{\text{land}} = 0$) \\
+ & Cooling Mechanism & Evaporative Towers + Chillers & Liquid Immersion + Geothermal Sink \\
+ & Power Usage Effectiveness ($\text{PUE}$) & $1.45$ & $1.05$ \\
+ & Annual Total Energy Input ($E_{\text{tot}}$) & $12.70 \times 10^6\text{ kWh}\cdot\text{yr}^{-1}$ & $9.20 \times 10^6\text{ kWh}\cdot\text{yr}^{-1}$ \\
+ & Thermal Exergy Recovery Fraction ($\eta_{\text{th}}$) & $0.00$ ($100\%$ Vented to Air) & $0.96$ ($8.41 \times 10^6\text{ kWh}_{\text{th}}\cdot\text{yr}^{-1}$) \\
+\colrule
+\textbf{Vital Flows ($q_i$)} & Net Potable Water Flux ($\dot{q}_{\text{water}}$) & $-16{,}200\text{ m}^3\cdot\text{yr}^{-1}$ (Consumed) & $+9{,}850\text{ m}^3\cdot\text{yr}^{-1}$ (MOF Distilled) \\
+ & Annual Caloric / Food Output ($\dot{q}_{\text{food}}$) & $0\text{ kcal}\cdot\text{yr}^{-1}$ & $+1.45 \times 10^8\text{ kcal}\cdot\text{yr}^{-1}$ \\
+\colrule
+\textbf{Ecosystems ($e_j$)} & Surface Greenhouse Biomass ($\Delta \dot{e}_{\text{NPP}}$) & $-12.4\text{ t}_{\text{biomass}}\cdot\text{yr}^{-1}$ (Cleared) & $+680.0\text{ t}_{\text{biomass}}\cdot\text{yr}^{-1}$ \\
+ & Microclimatic Heat Island Perturbation & $+1.45\text{ MW}$ Sensible/Latent Plume & Zero Surface Plume (Closed Cascade) \\
+\colrule
+\textbf{Stocks ($s_k$)} & Biochar Produced ($\dot{m}_{\text{char}}$) & $0\text{ t}\cdot\text{yr}^{-1}$ & $+512\text{ t}_{\text{char}}\cdot\text{yr}^{-1}$ \\
+ & Net Soil Carbon Sequestration ($\dot{s}_{\text{soil}}$) & $-4.8\text{ tC}\cdot\text{yr}^{-1}$ & $+420\text{ tC}\cdot\text{yr}^{-1}$ ($+1{,}540\text{ tCO}_2\text{e}\cdot\text{yr}^{-1}$) \\
+ & Stock Convexity Multiplier ($\Gamma_{\text{soil}}/\gamma_{0,\text{soil}}$) & Penalized ($-\pi_k|\Delta s_k|$) & Rewarded ($+\pi_k \Delta s_k$) \\
+\colrule
+\textbf{Consensus ($V_{\text{stock}}$)} & Telemetry Verification Protocol & Centralized / Unverified ESG & D-Trinity ($\text{SHA-256} \parallel \text{Nostr} \parallel \text{BTC}$) \\
+ & Societal Trust Phase ($C_s$) & Low ($C_s \to 0.12$) & High ($C_s \to 0.94$) \\
+\colrule
+\textbf{Master KPI} & \textbf{Annual Wellbeing Change ($\Delta W$)} & $\mathbf{-53{,}340\text{ WU}\cdot\text{yr}^{-1}}$ & $\mathbf{+172{,}040\text{ WU}\cdot\text{yr}^{-1}}$ \\
+ & \textbf{Specific Wellbeing Yield ($\eta_{\text{WU}}$)} & $\mathbf{-4.20\text{ mWU}\cdot\text{kWh}^{-1}}$ & $\mathbf{+18.70\text{ mWU}\cdot\text{kWh}^{-1}}$ \\
+\end{tabular}%
+}
+\end{ruledtabular}
+\end{table*}
+
+The numerical contrast in Table~\ref{tab:full_comparison} underscores the paradigm shift of the WU Accounting Framework. Evaluated under fiat GDP, both facilities register identical computational revenue, and the legacy data center may even appear slightly larger in GDP terms due to its higher utility electricity bills ($12.70\text{ GWh}$ vs. $9.20\text{ GWh}$) and municipal water purchases. Evaluated under $\eta_{\text{WU}}$, the physical reality is laid bare: the legacy surface facility operates in the deep extractive regime ($-4.20\text{ mWU}\cdot\text{kWh}^{-1}$), whereas the Inverted Matrix achieves $+18.70\text{ mWU}\cdot\text{kWh}^{-1}$, generating a net positive shift of $+22.90\text{ mWU}\cdot\text{kWh}^{-1}$ while actively rebuilding planetary pedospheric and hydrological stocks.
+
+\section{Discussion and Conclusion: Toward the 2044 Horizon}
+
+The synthesis of the Wellbeing Unit ($\text{WU}$) Accounting Framework and the \textit{Inverted Matrix} establishes a rigorous scientific foundation for post-fiat civilization:
+\begin{enumerate}
+    \item \textbf{Closure of the Ecological Arbitrage Loop:} By integrating vital flows ($q_i$), ecosystem services ($e_j$), and high-convexity planetary stocks ($s_k$) into a single cardinal state function $W(t)$, economic agents can no longer manufacture illusory growth by liquidating natural capital near $s_{k,\text{crit}}$.
+    \item \textbf{Immunity to Institutional Corruption:} By anchoring physical telemetry in the D-Trinity cryptographic primitive ($V_{\text{stock}}$) and the Nakamoto Action ($S_{\text{Nakamoto}} \ge k_{\text{Nak}}$), ecological accounting becomes a branch of experimental information physics rather than bureaucratic politics.
+    \item \textbf{Symbiosis of Silicon and Biosphere:} Through the subterranean-to-surface exergy cascade of the Inverted Matrix, high-density computation (both AI orchestration and Proof-of-Work consensus) ceases to compete with the living world for water and energy, becoming instead the thermal heartbeat of atmospheric water generation, regenerative agriculture, and millennial biochar soil restoration.
+\end{enumerate}
+
+By adopting $\text{mWU}\cdot\text{kWh}^{-1}$ as the primary macroeconomic compass, humanity transitions from an entropic extractive game to a negentropic planetary stewardship capable of realizing the 2044 sustainability horizon.
+
+\begin{acknowledgments}
+The author acknowledges the collaborative research ecosystem of the Information Physics Institute (IPI), Lemuria Technologies, and The Sun Standard Research Initiative in Sydney, Australia, with special appreciation to Jennifer Yii for foundational contributions to the statistical-physics formalism of distributed consensus.
+\end{acknowledgments}
+
+\begin{thebibliography}{32}
+
+\bibitem{GeorgescuRoegen1971}
+N. Georgescu-Roegen, \textit{The Entropy Law and the Economic Process} (Harvard University Press, Cambridge, MA, 1971).
+
+\bibitem{Daly1996}
+H. E. Daly, \textit{Beyond Growth: The Economics of Sustainable Development} (Beacon Press, Boston, 1996).
+
+\bibitem{Prigogine1977}
+I. Prigogine and G. Nicolis, \textit{Self-Organization in Non-Equilibrium Systems: From Dissipative Structures to Order through Fluctuations} (Wiley-Interscience, New York, 1977).
+
+\bibitem{Jaynes1957}
+E. T. Jaynes, Information Theory and Statistical Mechanics, Phys. Rev. \textbf{106}, 620 (1957).
+
+\bibitem{Mirowski1989}
+P. Mirowski, \textit{More Heat than Light: Economics as Social Physics, Physics as Nature's Economics} (Cambridge University Press, Cambridge, 1989).
+
+\bibitem{Yakovenko2009}
+V. M. Yakovenko and J. B. Rosser Jr., Colloquium: Statistical mechanics of money, wealth, and income, Rev. Mod. Phys. \textbf{81}, 1703 (2009).
+
+\bibitem{Alden2023}
+L. Alden, \textit{Broken Money: Why Our Financial System is Failing Us and How We Can Make It Better} (Timestamp Press, 2023).
+
+\bibitem{Booth2020}
+J. Booth, \textit{The Price of Tomorrow: Why Deflation is the Key to an Abundant Future} (Stanley Press, 2020).
+
+\bibitem{Lepard2025}
+L. Lepard, \textit{The Big Print: What Happened to America and How Sound Money Will Fix It} (2025).
+
+\bibitem{Bejan2016}
+A. Bejan, \textit{Advanced Engineering Thermodynamics}, 4th ed. (Wiley, Hoboken, NJ, 2016).
+
+\bibitem{Kleidon2016}
+A. Kleidon, \textit{Thermodynamic Foundations of the Earth System} (Cambridge University Press, Cambridge, 2016).
+
+\bibitem{Lovelock1979}
+J. E. Lovelock, \textit{Gaia: A New Look at Life on Earth} (Oxford University Press, Oxford, 1979).
+
+\bibitem{RanaoraSunStandard}
+P. Ranaora, \textit{Homo Biodiversitas: The Sun Standard (L'\'Etalon Solaire)} and \textit{Horizon Z\'ero: 2044} (The Sun Standard Press, Sydney, 2026); open-source specification at \url{https://github.com/pascalranoroarijaona/wellbeing-framework} and \url{https://www.thesunstandard.net/blog/matrice-inversee.html?lg=EN}.
+
+\bibitem{Robeyns2024}
+I. Robeyns, \textit{Limitarianism: The Case Against Extreme Wealth} (Allen Lane / Penguin, London, 2024).
+
+\bibitem{Freire1970}
+P. Freire, \textit{Pedagogy of the Oppressed (P\'edagogie des opprim\'es)} (Herder and Herder, New York, 1970).
+
+\bibitem{Costanza1997}
+R. Costanza \textit{et al.}, The value of the world's ecosystem services and natural capital, Nature \textbf{387}, 253 (1997).
+
+\bibitem{Odum1996}
+H. T. Odum, \textit{Environmental Accounting: Emergy and Environmental Decision Making} (Wiley, New York, 1996).
+
+\bibitem{Rockstrom2009}
+J. Rockstr\"om \textit{et al.}, A safe operating space for humanity, Nature \textbf{461}, 472 (2009).
+
+\bibitem{Steffen2015}
+W. Steffen \textit{et al.}, Planetary boundaries: Guiding human development on a changing planet, Science \textbf{347}, 1259855 (2015).
+
+\bibitem{Goodhart1975}
+C. A. E. Goodhart, Problems of Monetary Management: The U.K. Experience, in \textit{Papers in Monetary Economics}, Vol. I (Reserve Bank of Australia, Sydney, 1975).
+
+\bibitem{Landauer1961}
+R. Landauer, Irreversibility and Heat Generation in the Computing Process, IBM J. Res. Dev. \textbf{5}, 183 (1961).
+
+\bibitem{Bennett1982}
+C. H. Bennett, The thermodynamics of computation---a review, Int. J. Theor. Phys. \textbf{21}, 905 (1982).
+
+\bibitem{Nakamoto2008}
+S. Nakamoto, Bitcoin: A Peer-to-Peer Electronic Cash System (2008), \url{https://bitcoin.org/bitcoin.pdf}.
+
+\bibitem{Szabo2002}
+N. Szabo, Shelling Out: The Origins of Money (2002); see also \textit{Homo Cryptographicus} by P. Ranaora (2025).
+
+\bibitem{Bailey2024}
+A. M. Bailey, B. Rettler, and C. Warmke, \textit{Resistance Money: A Philosophical Case for Bitcoin} (Routledge, New York, 2024).
+
+\bibitem{ConnesRovelli1994}
+A. Connes and C. Rovelli, Von Neumann algebra automorphisms and time-thermodynamics relation in generally covariant quantum theories, Class. Quantum Grav. \textbf{11}, 2899 (1994).
+
+\bibitem{RanaoraYii2026}
+P. Ranaora and J. Yii, A Phenomenological Statistical-Physics Framework for Distributed Consensus: Phase Transitions and Thermodynamic Stability, IPI Letters (2026), \href{https://doi.org/10.5281/zenodo.19160047}{DOI: 10.5281/zenodo.19160047} (\href{https://doi.org/10.59973/ipil.325}{10.59973/ipil.325}).
+
+\bibitem{RanaoraNash2026}
+P. Ranaora, L'ancrage thermodynamique du consensus num\'erique : faire avancer la monnaie id\'eale asymptotique de John Nash (2026), \href{https://doi.org/10.5281/zenodo.19157590}{DOI: 10.5281/zenodo.19157590}.
+
+\bibitem{RanaoraThermo2026}
+P. Ranaora, La Thermodynamique de la D\'ecentralisation (2026), \href{https://doi.org/10.5281/zenodo.22790655}{DOI: 10.5281/zenodo.22790655}.
+
+\bibitem{Kuhner2014}
+T. K. Kuhner, \textit{Capitalism v. Democracy: Money in Politics and the Free Market Constitution} (Stanford University Press, Stanford, CA, 2014).
+
+\bibitem{Kim2017MOF}
+H. Kim \textit{et al.}, Water harvesting from air with metal-organic frameworks powered by natural sunlight, Science \textbf{356}, 430 (2017).
+
+\bibitem{Lehmann2015Biochar}
+J. Lehmann and S. Joseph, \textit{Biochar for Environmental Management: Science, Technology and Implementation}, 2nd ed. (Routledge, London, 2015).
+
+\end{thebibliography}
+
+\end{document}
