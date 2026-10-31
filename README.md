@@ -59,7 +59,7 @@ Biological data states are cryptographically signed. The daily Stock-to-Flow sta
 ### **1. Measurement Science: The Wellbeing Unit (WU)**
 - **Goal**: Define a universal, cardinal scientific wellbeing unit.
 - **Output**: **ISO-standard wellbeing weights (α, β, γ)**
-> **Paper 1**: *"The Wellbeing Unit: A New SI for Human and Planetary Flourishing"* (2026)
+> **Paper 1**: *"The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus"* (2026)
 
 ### **2. The Biological Stock-to-Flow Ratio**
 - **Goal**: Apply econophysics to biological populations, measuring total biomass stock against anthropogenic extraction flows.
