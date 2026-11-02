@@ -1,0 +1,18 @@
+{
+  "kind": 1040,
+  "created_at": 1793581389,
+  "tags": [
+    [
+      "x",
+      "e05073b8d13212541373c232a9154bb304d8de70aa0fafe4e4dad567490f8cdc"
+    ],
+    [
+      "filename",
+      "wu_accounting_framework.pdf"
+    ]
+  ],
+  "content": "D-Trinity Proof of Provenance",
+  "pubkey": "929b62d1d54090b224f6e73f31e78ebe76df5e3822f891a4a542343dba8eed51",
+  "id": "d735e4f69342dd425be85732c2fb43f8cb5b2237d80e9147c91a0807b5ecba06",
+  "sig": "66cd20603dcf795f7d345ead78454da6e71cb9aa0d2f4fac22775f1d84776f94f6cf0bf7e48352fca3a8faf7491c2dce4a8d0c1e4bf7a9baf66f3449b98b5f08"
+}
