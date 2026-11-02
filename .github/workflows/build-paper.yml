@@ -31,7 +31,9 @@ jobs:
       - name: Install Crypto Dependencies
         run: |
           npm init -y
+          npm pkg set type="module"
           npm install opentimestamps nostr-tools
+
 
       # ---- 2. OPTIONAL COMPILATION STEP (e.g. your LaTeX code) ----
       - name: Compile LaTeX to PDF

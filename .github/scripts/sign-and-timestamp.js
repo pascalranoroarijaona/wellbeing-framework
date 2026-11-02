@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import OpenTimestamps from 'opentimestamps';
-import { getPublicKey, finishEvent } from 'nostr-tools';
+import { finalizeEvent } from 'nostr-tools/pure';
 import { nip19 } from 'nostr-tools';
 
 // Target file provided via command argument
@@ -17,16 +17,19 @@ const dirName = path.dirname(targetFile);
 const otsPath = path.join(dirName, `${baseName}.ots`);
 const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 
-// 1. Resolve the Secret Key safely from GitHub Environment
+// Resolve the Secret Key safely from GitHub Environment
 let nsecEnv = process.env.NOSTR_NSEC;
 if (!nsecEnv) {
   console.error("❌ NOSTR_NSEC environment variable is missing.");
   process.exit(1);
 }
+
+let privateKeyBytes;
 if (nsecEnv.startsWith('nsec')) {
-  nsecEnv = nip19.decode(nsecEnv).data; // Converts nsec1... string to Uint8Array hex bytes
+  privateKeyBytes = nip19.decode(nsecEnv).data; // Converts nsec1... string to Uint8Array hex bytes
+} else {
+  privateKeyBytes = Buffer.from(nsecEnv, 'hex');
 }
-const privateKeyBytes = typeof nsecEnv === 'string' ? Buffer.from(nsecEnv, 'hex') : nsecEnv;
 
 async function run() {
   const fileBuffer = fs.readFileSync(targetFile);
@@ -73,7 +76,8 @@ async function run() {
     content: "D-Trinity Proof of Provenance via GitHub Actions"
   };
 
-  const signedEvent = finishEvent(unsignedEvent, privateKeyBytes);
+  // Modern nostr-tools v2 API signature mutation pattern
+  const signedEvent = finalizeEvent(unsignedEvent, privateKeyBytes);
   fs.writeFileSync(jsonPath, JSON.stringify(signedEvent, null, 2));
   console.log(`📁 Generated Signed Nostr Metadata: ${jsonPath}`);
 }
