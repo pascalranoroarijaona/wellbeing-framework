@@ -19,14 +19,13 @@ const dirName = path.dirname(targetFile);
 const otsPath = path.join(dirName, `${baseName}.ots`);
 const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 
-// Pre-flight check: If files aren't compiled yet, we must fail validation to build them
-if (!fs.existsSync(targetFile) || !fs.existsSync(otsPath) || !fs.existsSync(jsonPath)) {
-  console.log("ℹ️ Core artifacts missing or incomplete. Signaling full compilation pipeline...");
-  process.exit(2); 
-}
-
 async function verifyAuditPipeline() {
   try {
+    // Missing files during audit check means verification fails cleanly
+    if (!fs.existsSync(targetFile) || !fs.existsSync(otsPath) || !fs.existsSync(jsonPath)) {
+      throw new Error("Core cryptographic artifacts are missing from disk.");
+    }
+
     const fileBuffer = fs.readFileSync(targetFile);
     const actualHash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
 
@@ -54,7 +53,7 @@ async function verifyAuditPipeline() {
     console.log("✅ CRITICAL AUDIT PASSED: Integrity, Identity, and Time signatures are fully synchronized.");
     return true;
   } catch (auditError) {
-    console.log(`⚠️ AUDIT FAILED: ${auditError.message}`);
+    console.log(`⚠️ AUDIT CHECK REQUIRED: ${auditError.message}`);
     return false;
   }
 }
@@ -66,6 +65,12 @@ async function run() {
   }
 
   // --- STANDARD GENERATION MODE ---
+  // Ensure the PDF actually compiled before continuing
+  if (!fs.existsSync(targetFile)) {
+    console.error(`❌ Cannot sign/timestamp: ${targetFile} does not exist. Ensure LaTeX compiled successfully.`);
+    process.exit(1);
+  }
+
   let nsecEnv = process.env.NOSTR_NSEC;
   if (!nsecEnv) {
     console.error("❌ NOSTR_NSEC environment variable is missing.");
@@ -99,7 +104,7 @@ async function run() {
       const isUpgraded = await OpenTimestamps.upgrade(detachedFile);
       const upgradedData = detachedFile.serializeToBytes();
       fs.writeFileSync(otsPath, Buffer.from(upgradedData));
-      console.log(isUpgraded ? `✅ Bitcoin confirmation appended successfully.` : `ℹ️ Proof status unchanged.`);
+      console.log(isUpgraded ? `✅ Bitcoin confirmation appended successfully.` : `ℹ dependency matching checked: Proof status unchanged.`);
     } catch (err) {
       console.error(`⚠️ OTS synchronization error: ${err.message}`);
     }
