@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import OpenTimestamps from 'opentimestamps';
-import { finalizeEvent, verifySignature } from 'nostr-tools/pure';
+import { finalizeEvent, verifyEvent } from 'nostr-tools/pure'; // 2.x unified verification utility
 import { nip19 } from 'nostr-tools';
 
 const targetFile = process.argv[2];
@@ -19,7 +19,7 @@ const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 // Pre-flight check: If files aren't compiled yet, we must proceed with generation
 if (!fs.existsSync(targetFile) || !fs.existsSync(otsPath) || !fs.existsSync(jsonPath)) {
   console.log("ℹ️ Core artifacts missing. Signaling full compilation pipeline...");
-  process.exit(2); // Custom code 2: Audit cannot run because files are missing
+  process.exit(2); 
 }
 
 async function verifyAuditPipeline() {
@@ -34,8 +34,8 @@ async function verifyAuditPipeline() {
       throw new Error("Integrity mismatch: PDF hash does not match Nostr metadata value.");
     }
 
-    // 2. Audit Pillar: Identity (Nostr Cryptography Check)
-    const isSigValid = verifySignature(cert);
+    // 2. Audit Pillar: Identity (Nostr Cryptography Check using verifyEvent)
+    const isSigValid = verifyEvent(cert);
     if (!isSigValid) {
       throw new Error("Identity failure: Schnorr signature on JSON certificate is invalid.");
     }
@@ -57,13 +57,13 @@ async function verifyAuditPipeline() {
 }
 
 async function run() {
-  // If the user requested an action-check only, run audit and exit
+  // Check if we are running in verification mode
   if (process.argv[3] === '--check-only') {
     const passed = await verifyAuditPipeline();
-    process.exit(passed ? 0 : 2); // 0 = Don't re-compile; 2 = Fail/Needs compilation
+    process.exit(passed ? 0 : 2); 
   }
 
-  // --- STANDARD GENERATION MODE ---
+  // --- STANDARD GENERATION & UPGRADE MODE ---
   let nsecEnv = process.env.NOSTR_NSEC;
   if (!nsecEnv) {
     console.error("❌ NOSTR_NSEC environment variable is missing.");
@@ -76,6 +76,7 @@ async function run() {
   const hashBytes = crypto.createHash('sha256').update(fileBuffer).digest();
 
   // Generate updated Nostr Event Signature (Kind 1040)
+  console.log(`🚀 Updating Nostr Provenance Signature for latest build of ${baseName}...`);
   const unsignedEvent = {
     kind: 1040,
     created_at: Math.floor(Date.now() / 1000),
@@ -105,6 +106,7 @@ async function run() {
     const detachedFile = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
     await OpenTimestamps.stamp(detachedFile);
     fs.writeFileSync(otsPath, Buffer.from(detachedFile.serializeToBytes()));
+    console.log(`📁 Generated initial pending OTS stamp.`);
   }
 }
 
