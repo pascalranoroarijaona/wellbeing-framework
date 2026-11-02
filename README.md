@@ -29,10 +29,10 @@
 ---
 ## Scientific Manuscript & Cryptographic Provenance
 
-* **Title:** *The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus*
+* **Title:** *The WU Accounting Framework: From Human Flourishing to Planetary Resource Stocks via Thermodynamic Consensus* https://doi.org/10.5281/zenodo.23873907
 * **LaTeX Source (REVTeX 4.2):** [`paper/wu_accounting_framework.tex`](paper/wu_accounting_framework.tex)
 * **Compiled Manuscript (PDF):** [`paper/wu_accounting_framework.pdf`](paper/wu_accounting_framework.pdf)
-* **SHA-256 Checksums:** [`paper/wu_accounting_framework.sha256`](paper/wu_accounting_framework.sha256)
+* **JSON Certificate Provenance:** [`paper/wu_accounting_framework.pdf.provenance.json`](paper/wu_accounting_framework.pdf.provenance.json)
 * **Case Study Architecture:** [The Inverted Matrix (*La Matrice Inversée*)](https://www.thesunstandard.net/blog/matrice-inversee.html?lg=EN)
 
 ---
