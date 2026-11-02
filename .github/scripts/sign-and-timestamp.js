@@ -5,7 +5,6 @@ import OpenTimestamps from 'opentimestamps';
 import { finalizeEvent } from 'nostr-tools/pure';
 import { nip19 } from 'nostr-tools';
 
-// Target file provided via command argument
 const targetFile = process.argv[2];
 if (!targetFile || !fs.existsSync(targetFile)) {
   console.error("❌ Target file missing or invalid.");
@@ -17,7 +16,6 @@ const dirName = path.dirname(targetFile);
 const otsPath = path.join(dirName, `${baseName}.ots`);
 const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 
-// Resolve the Secret Key safely from GitHub Environment
 let nsecEnv = process.env.NOSTR_NSEC;
 if (!nsecEnv) {
   console.error("❌ NOSTR_NSEC environment variable is missing.");
@@ -26,7 +24,7 @@ if (!nsecEnv) {
 
 let privateKeyBytes;
 if (nsecEnv.startsWith('nsec')) {
-  privateKeyBytes = nip19.decode(nsecEnv).data; // Converts nsec1... string to Uint8Array hex bytes
+  privateKeyBytes = nip19.decode(nsecEnv).data;
 } else {
   privateKeyBytes = Buffer.from(nsecEnv, 'hex');
 }
@@ -36,9 +34,22 @@ async function run() {
   const hashHex = crypto.createHash('sha256').update(fileBuffer).digest('hex');
   const hashBytes = crypto.createHash('sha256').update(fileBuffer).digest();
 
-  // --- MODE A: UPGRADE EXISTING OTS ---
+  // 1. ALWAYS RE-GENERATE NOSTR SIGNATURE WITH CURRENT HASH (Fixes your issue)
+  console.log(`🚀 Updating Nostr Provenance Signature for latest build of ${baseName}...`);
+  const unsignedEvent = {
+    kind: 1040,
+    created_at: Math.floor(Date.now() / 1000),
+    tags: [['x', hashHex], ['filename', baseName]],
+    content: "D-Trinity Proof of Provenance via GitHub Actions"
+  };
+
+  const signedEvent = finalizeEvent(unsignedEvent, privateKeyBytes);
+  fs.writeFileSync(jsonPath, JSON.stringify(signedEvent, null, 2));
+  console.log(`📁 Generated New Signed Nostr Metadata: ${jsonPath}`);
+
+  // 2. LOGICAL FORK FOR OPENTIMESTAMPS ENGINES
   if (fs.existsSync(otsPath)) {
-    console.log(`⏳ Found existing proof. Attempting to query Bitcoin calendars to upgrade...`);
+    console.log(`⏳ Found existing proof. Querying Bitcoin calendars to upgrade...`);
     try {
       const otsBytes = fs.readFileSync(otsPath);
       const detached = OpenTimestamps.DetachedTimestampFile.deserialize(otsBytes);
@@ -50,36 +61,20 @@ async function run() {
         fs.writeFileSync(otsPath, Buffer.from(upgradedData));
         console.log(`✅ Success! Bitcoin block confirmation found and merged into ${otsPath}`);
       } else {
-        console.log(`ℹ️ Stamp is still pending confirmation or already fully upgraded. Checked calendars.`);
+        console.log(`ℹ️ Stamp is still pending confirmation or already fully upgraded.`);
       }
     } catch (err) {
       console.error(`⚠️ Upgrade failed: ${err.message}`);
     }
-    return;
+  } else {
+    // ONLY INITIAL SEED IF NO OTS LOG HAS EVER BEEN RECORDED
+    console.log(`🚀 Seeding initial OpenTimestamps record for ${baseName}...`);
+    const detached = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
+    await OpenTimestamps.stamp(detached);
+    const fullOtsFile = detached.serializeToBytes();
+    fs.writeFileSync(otsPath, Buffer.from(fullOtsFile));
+    console.log(`📁 Generated temporary pending OTS: ${otsPath}`);
   }
-
-  // --- MODE B: INITIAL SEEDING (JSON & OTS GENERATION) ---
-  console.log(`🚀 Starting initial stamping for ${baseName}...`);
-
-  // 1. OpenTimestamps Detached Timestamp
-  const detached = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
-  await OpenTimestamps.stamp(detached);
-  const fullOtsFile = detached.serializeToBytes();
-  fs.writeFileSync(otsPath, Buffer.from(fullOtsFile));
-  console.log(`📁 Generated temporary pending OTS: ${otsPath}`);
-
-  // 2. Nostr Event Signing (Kind 1040)
-  const unsignedEvent = {
-    kind: 1040,
-    created_at: Math.floor(Date.now() / 1000),
-    tags: [['x', hashHex], ['filename', baseName]],
-    content: "D-Trinity Proof of Provenance via GitHub Actions"
-  };
-
-  // Modern nostr-tools v2 API signature mutation pattern
-  const signedEvent = finalizeEvent(unsignedEvent, privateKeyBytes);
-  fs.writeFileSync(jsonPath, JSON.stringify(signedEvent, null, 2));
-  console.log(`📁 Generated Signed Nostr Metadata: ${jsonPath}`);
 }
 
 run().catch(console.error);
