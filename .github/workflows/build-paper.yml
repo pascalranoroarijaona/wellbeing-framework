@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build_latex:
-    runs-on: ubuntu-latest
+    runs-runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,11 +27,6 @@ jobs:
           root_file: wu_accounting_framework.tex
           working_directory: paper
           latexmk_use_xelatex: false
-          extra_system_packages: |
-            texlive-publishers
-            texlive-science
-            texlive-latex-extra
-            texlive-fonts-recommended
 
       - name: Generate SHA-256 Provenance Digest
         working-directory: paper
