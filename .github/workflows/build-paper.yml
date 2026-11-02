@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build_latex:
-    runs-runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
