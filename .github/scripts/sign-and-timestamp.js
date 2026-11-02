@@ -2,23 +2,26 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import OpenTimestamps from 'opentimestamps';
-import { finalizeEvent, verifyEvent } from 'nostr-tools/pure'; // 2.x unified verification utility
+import { finalizeEvent, verifyEvent } from 'nostr-tools/pure';
 import { nip19 } from 'nostr-tools';
 
+// Target file is the third argument: node script.js <targetFile>
 const targetFile = process.argv[2];
 if (!targetFile) {
   console.error("❌ Target file path argument missing.");
   process.exit(1);
 }
 
+const isCheckOnly = process.argv.includes('--check-only');
+
 const baseName = path.basename(targetFile);
 const dirName = path.dirname(targetFile);
 const otsPath = path.join(dirName, `${baseName}.ots`);
 const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 
-// Pre-flight check: If files aren't compiled yet, we must proceed with generation
+// Pre-flight check: If files aren't compiled yet, we must fail validation to build them
 if (!fs.existsSync(targetFile) || !fs.existsSync(otsPath) || !fs.existsSync(jsonPath)) {
-  console.log("ℹ️ Core artifacts missing. Signaling full compilation pipeline...");
+  console.log("ℹ️ Core artifacts missing or incomplete. Signaling full compilation pipeline...");
   process.exit(2); 
 }
 
@@ -34,7 +37,7 @@ async function verifyAuditPipeline() {
       throw new Error("Integrity mismatch: PDF hash does not match Nostr metadata value.");
     }
 
-    // 2. Audit Pillar: Identity (Nostr Cryptography Check using verifyEvent)
+    // 2. Audit Pillar: Identity (Nostr Cryptography Check)
     const isSigValid = verifyEvent(cert);
     if (!isSigValid) {
       throw new Error("Identity failure: Schnorr signature on JSON certificate is invalid.");
@@ -57,13 +60,12 @@ async function verifyAuditPipeline() {
 }
 
 async function run() {
-  // Check if we are running in verification mode
-  if (process.argv[3] === '--check-only') {
+  if (isCheckOnly) {
     const passed = await verifyAuditPipeline();
     process.exit(passed ? 0 : 2); 
   }
 
-  // --- STANDARD GENERATION & UPGRADE MODE ---
+  // --- STANDARD GENERATION MODE ---
   let nsecEnv = process.env.NOSTR_NSEC;
   if (!nsecEnv) {
     console.error("❌ NOSTR_NSEC environment variable is missing.");
@@ -106,7 +108,7 @@ async function run() {
     const detachedFile = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
     await OpenTimestamps.stamp(detachedFile);
     fs.writeFileSync(otsPath, Buffer.from(detachedFile.serializeToBytes()));
-    console.log(`📁 Generated initial pending OTS stamp.`);
+    console.log(`📁 Fresh pending OTS stamp safely written to disk.`);
   }
 }
 
