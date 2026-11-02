@@ -35,8 +35,8 @@ jobs:
           npm install opentimestamps nostr-tools
 
       # ---- CRITICAL CHECKSTEP: PIPELINE AUDIT VERIFICATION ----
-      # We allow this step to continue on error because a missing file or failed audit
-      # safely indicates that a new PDF compilation cycle is required.
+      # This step checks if your files are valid. If it returns code 2 (missing files), 
+      # continue-on-error lets the runner proceed to compile and generate proofs from scratch.
       - name: Run Sovereign Audit Pre-flight Check
         id: audit_check
         continue-on-error: true
