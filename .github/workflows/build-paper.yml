@@ -1,19 +1,20 @@
-name: Compile WU Accounting LaTeX Paper
+name: Automated Nostr Signing & Timechain Anchoring
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'paper/wu_accounting_framework.tex'
-      - '.github/workflows/build-paper.yml'
+      - 'paper/wu_accounting_framework.tex' # Compiles when document edits occur
+  schedule:
+    - cron: '0 */3 * * *' # Checks Bitcoin calendars automatically every 3 hours for confirmation
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build_latex:
+  build_and_anchor:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,23 +22,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Compile LaTeX to PDF (REVTeX 4.2)
+      # ---- 1. SETUP BUILD PIPELINE ----
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Crypto Dependencies
+        run: |
+          npm init -y
+          npm install opentimestamps nostr-tools
+
+      # ---- 2. OPTIONAL COMPILATION STEP (e.g. your LaTeX code) ----
+      - name: Compile LaTeX to PDF
         uses: xu-cheng/latex-action@v3
+        continue-on-error: true # Ensure execution script runs even if tex configuration shifts
         with:
           root_file: wu_accounting_framework.tex
           working_directory: paper
           latexmk_use_xelatex: false
 
-      - name: Generate SHA-256 Provenance Digest
-        working-directory: paper
+      # ---- 3. RUN NOSTR AND OPEN-TIMESTAMPS ENGINE ----
+      # This looks for paper/wu_accounting_framework.pdf, generates JSON/OTS if empty, 
+      # or automatically upgrades it if the file already exists.
+      - name: Process Signature & Timechain Anchoring
+        env:
+          NOSTR_NSEC: ${{ secrets.NOSTR_NSEC }}
         run: |
-          sha256sum wu_accounting_framework.pdf wu_accounting_framework.tex > wu_accounting_framework.sha256
-          cat wu_accounting_framework.sha256
+          node .github/scripts/sign-and-timestamp.js paper/wu_accounting_framework.pdf
 
-      - name: Commit compiled PDF and SHA-256 back to repo
+      # ---- 4. COMMIT RESULTS PERMANENTLY ----
+      - name: Push signed data and time logs back to code repository
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add paper/wu_accounting_framework.pdf paper/wu_accounting_framework.sha256
-          git diff --staged --quiet || git commit -m "chore(paper): auto-compile wu_accounting_framework.pdf and update SHA-256 [skip ci]"
+          git add paper/*.pdf paper/*.json paper/*.ots || true
+          git diff --staged --quiet || git commit -m "chore: update timechain anchor logs [skip ci]"
           git push origin main
