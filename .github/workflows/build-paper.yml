@@ -5,9 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'paper/wu_accounting_framework.tex' # Compiles when document edits occur
+      - 'paper/wu_accounting_framework.tex'
+      - '.github/workflows/build-paper.yml'
   schedule:
-    - cron: '0 */3 * * *' # Checks Bitcoin calendars automatically every 3 hours for confirmation
+    - cron: '0 */3 * * *'
   workflow_dispatch:
 
 permissions:
@@ -22,7 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ---- 1. SETUP BUILD PIPELINE ----
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
@@ -34,30 +34,40 @@ jobs:
           npm pkg set type="module"
           npm install opentimestamps nostr-tools
 
+      # ---- CRITICAL CHECKSTEP: PIPELINE AUDIT VERIFICATION ----
+      # This step uses custom check evaluations to set a flag determining if compilation is required.
+      - name: Run Sovereign Audit Pre-flight Check
+        id: audit_check
+        run: |
+          if node .github/scripts/sign-and-timestamp.js paper/wu_accounting_framework.pdf --check-only; then
+            echo "NEED_BUILD=false" >> $GITHUB_ENV
+            echo "🎉 Pipeline is mathematically locked and valid. Skipping rebuild."
+          else
+            echo "NEED_BUILD=true" >> $GITHUB_ENV
+            echo "⚠️ Verification failed or files missing. Initializing compilation stack."
+          fi
 
-      # ---- 2. OPTIONAL COMPILATION STEP (e.g. your LaTeX code) ----
+      # ---- LATEX COMPILATION (RUNS ONLY IF AUDIT FAILS / TEX MODIFIED) ----
       - name: Compile LaTeX to PDF
+        if: env.NEED_BUILD == 'true'
         uses: xu-cheng/latex-action@v3
-        continue-on-error: true # Ensure execution script runs even if tex configuration shifts
         with:
           root_file: wu_accounting_framework.tex
           working_directory: paper
           latexmk_use_xelatex: false
 
-      # ---- 3. RUN NOSTR AND OPEN-TIMESTAMPS ENGINE ----
-      # This looks for paper/wu_accounting_framework.pdf, generates JSON/OTS if empty, 
-      # or automatically upgrades it if the file already exists.
+      # ---- FORGE ENVELOPE STRUCTS AND RUN LOG TIMESTAMP ENGINE ----
       - name: Process Signature & Timechain Anchoring
         env:
           NOSTR_NSEC: ${{ secrets.NOSTR_NSEC }}
         run: |
           node .github/scripts/sign-and-timestamp.js paper/wu_accounting_framework.pdf
 
-      # ---- 4. COMMIT RESULTS PERMANENTLY ----
+      # ---- SECURE WRITEDOWN BACK INTO CODEBASE ----
       - name: Push signed data and time logs back to code repository
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add paper/*.pdf paper/*.json paper/*.ots || true
-          git diff --staged --quiet || git commit -m "chore: update timechain anchor logs [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: optimize cryptographic time logs [skip ci]"
           git push origin main

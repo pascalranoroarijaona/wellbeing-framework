@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import OpenTimestamps from 'opentimestamps';
-import { finalizeEvent } from 'nostr-tools/pure';
+import { finalizeEvent, verifySignature } from 'nostr-tools/pure';
 import { nip19 } from 'nostr-tools';
 
 const targetFile = process.argv[2];
-if (!targetFile || !fs.existsSync(targetFile)) {
-  console.error("❌ Target file missing or invalid.");
+if (!targetFile) {
+  console.error("❌ Target file path argument missing.");
   process.exit(1);
 }
 
@@ -16,26 +16,66 @@ const dirName = path.dirname(targetFile);
 const otsPath = path.join(dirName, `${baseName}.ots`);
 const jsonPath = path.join(dirName, `${baseName}.provenance.json`);
 
-let nsecEnv = process.env.NOSTR_NSEC;
-if (!nsecEnv) {
-  console.error("❌ NOSTR_NSEC environment variable is missing.");
-  process.exit(1);
+// Pre-flight check: If files aren't compiled yet, we must proceed with generation
+if (!fs.existsSync(targetFile) || !fs.existsSync(otsPath) || !fs.existsSync(jsonPath)) {
+  console.log("ℹ️ Core artifacts missing. Signaling full compilation pipeline...");
+  process.exit(2); // Custom code 2: Audit cannot run because files are missing
 }
 
-let privateKeyBytes;
-if (nsecEnv.startsWith('nsec')) {
-  privateKeyBytes = nip19.decode(nsecEnv).data;
-} else {
-  privateKeyBytes = Buffer.from(nsecEnv, 'hex');
+async function verifyAuditPipeline() {
+  try {
+    const fileBuffer = fs.readFileSync(targetFile);
+    const actualHash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
+
+    // 1. Audit Pillar: Integrity (JSON Check)
+    const cert = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+    const expectedTag = cert.tags.find(t => t[0] === 'x');
+    if (!expectedTag || actualHash !== expectedTag[1]) {
+      throw new Error("Integrity mismatch: PDF hash does not match Nostr metadata value.");
+    }
+
+    // 2. Audit Pillar: Identity (Nostr Cryptography Check)
+    const isSigValid = verifySignature(cert);
+    if (!isSigValid) {
+      throw new Error("Identity failure: Schnorr signature on JSON certificate is invalid.");
+    }
+
+    // 3. Audit Pillar: Timechain Matrix Structure
+    const otsBytes = fs.readFileSync(otsPath);
+    const detached = OpenTimestamps.DetachedTimestampFile.deserialize(otsBytes);
+    const otsHashHex = Buffer.from(detached.timestamp.msg).toString('hex');
+    if (actualHash !== otsHashHex) {
+      throw new Error("Time mismatch: Inner OpenTimestamps payload footprint altered.");
+    }
+
+    console.log("✅ CRITICAL AUDIT PASSED: Integrity, Identity, and Time signatures are fully synchronized.");
+    return true;
+  } catch (auditError) {
+    console.log(`⚠️ AUDIT FAILED: ${auditError.message}`);
+    return false;
+  }
 }
 
 async function run() {
+  // If the user requested an action-check only, run audit and exit
+  if (process.argv[3] === '--check-only') {
+    const passed = await verifyAuditPipeline();
+    process.exit(passed ? 0 : 2); // 0 = Don't re-compile; 2 = Fail/Needs compilation
+  }
+
+  // --- STANDARD GENERATION MODE ---
+  let nsecEnv = process.env.NOSTR_NSEC;
+  if (!nsecEnv) {
+    console.error("❌ NOSTR_NSEC environment variable is missing.");
+    process.exit(1);
+  }
+
+  let privateKeyBytes = nsecEnv.startsWith('nsec') ? nip19.decode(nsecEnv).data : Buffer.from(nsecEnv, 'hex');
   const fileBuffer = fs.readFileSync(targetFile);
   const hashHex = crypto.createHash('sha256').update(fileBuffer).digest('hex');
   const hashBytes = crypto.createHash('sha256').update(fileBuffer).digest();
 
-  // 1. ALWAYS RE-GENERATE NOSTR SIGNATURE WITH CURRENT HASH (Fixes your issue)
-  console.log(`🚀 Updating Nostr Provenance Signature for latest build of ${baseName}...`);
+  // Generate updated Nostr Event Signature (Kind 1040)
   const unsignedEvent = {
     kind: 1040,
     created_at: Math.floor(Date.now() / 1000),
@@ -45,36 +85,27 @@ async function run() {
 
   const signedEvent = finalizeEvent(unsignedEvent, privateKeyBytes);
   fs.writeFileSync(jsonPath, JSON.stringify(signedEvent, null, 2));
-  console.log(`📁 Generated New Signed Nostr Metadata: ${jsonPath}`);
+  console.log(`📁 Validated Nostr JSON Profile written to: ${jsonPath}`);
 
-  // 2. LOGICAL FORK FOR OPENTIMESTAMPS ENGINES
+  // Perform OpenTimestamps synchronization
   if (fs.existsSync(otsPath)) {
-    console.log(`⏳ Found existing proof. Querying Bitcoin calendars to upgrade...`);
+    console.log(`⏳ Querying OpenTimestamps calendars for confirmations...`);
     try {
       const otsBytes = fs.readFileSync(otsPath);
-      const detached = OpenTimestamps.DetachedTimestampFile.deserialize(otsBytes);
-      
-      const isUpgraded = await OpenTimestamps.upgrade(detached);
-      const upgradedData = detached.serializeToBytes();
-
-      if (isUpgraded || upgradedData.length > otsBytes.length) {
-        fs.writeFileSync(otsPath, Buffer.from(upgradedData));
-        console.log(`✅ Success! Bitcoin block confirmation found and merged into ${otsPath}`);
-      } else {
-        console.log(`ℹ️ Stamp is still pending confirmation or already fully upgraded.`);
-      }
+      const detachedFile = OpenTimestamps.DetachedTimestampFile.deserialize(otsBytes);
+      const isUpgraded = await OpenTimestamps.upgrade(detachedFile);
+      const upgradedData = detachedFile.serializeToBytes();
+      fs.writeFileSync(otsPath, Buffer.from(upgradedData));
+      console.log(isUpgraded ? `✅ Bitcoin confirmation appended successfully.` : `ℹ️ Proof status unchanged.`);
     } catch (err) {
-      console.error(`⚠️ Upgrade failed: ${err.message}`);
+      console.error(`⚠️ OTS synchronization error: ${err.message}`);
     }
   } else {
-    // ONLY INITIAL SEED IF NO OTS LOG HAS EVER BEEN RECORDED
-    console.log(`🚀 Seeding initial OpenTimestamps record for ${baseName}...`);
-    const detached = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
-    await OpenTimestamps.stamp(detached);
-    const fullOtsFile = detached.serializeToBytes();
-    fs.writeFileSync(otsPath, Buffer.from(fullOtsFile));
-    console.log(`📁 Generated temporary pending OTS: ${otsPath}`);
+    console.log(`🚀 Forging baseline OpenTimestamps envelope entry...`);
+    const detachedFile = OpenTimestamps.DetachedTimestampFile.fromHash(new OpenTimestamps.Ops.OpSHA256(), hashBytes);
+    await OpenTimestamps.stamp(detachedFile);
+    fs.writeFileSync(otsPath, Buffer.from(detachedFile.serializeToBytes()));
   }
 }
 
-run().catch(console.error);
+run().catch(err => { console.error(err); process.exit(1); });
