@@ -35,9 +35,11 @@ jobs:
           npm install opentimestamps nostr-tools
 
       # ---- CRITICAL CHECKSTEP: PIPELINE AUDIT VERIFICATION ----
-      # This step uses custom check evaluations to set a flag determining if compilation is required.
+      # We allow this step to continue on error because a missing file or failed audit
+      # safely indicates that a new PDF compilation cycle is required.
       - name: Run Sovereign Audit Pre-flight Check
         id: audit_check
+        continue-on-error: true
         run: |
           if node .github/scripts/sign-and-timestamp.js paper/wu_accounting_framework.pdf --check-only; then
             echo "NEED_BUILD=false" >> $GITHUB_ENV
