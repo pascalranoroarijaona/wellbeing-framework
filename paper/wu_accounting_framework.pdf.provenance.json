@@ -1,6 +1,6 @@
 {
   "kind": 1040,
-  "created_at": 1794631611,
+  "created_at": 1794660896,
   "tags": [
     [
       "x",
@@ -13,6 +13,6 @@
   ],
   "content": "D-Trinity Proof of Provenance via GitHub Actions",
   "pubkey": "929b62d1d54090b224f6e73f31e78ebe76df5e3822f891a4a542343dba8eed51",
-  "id": "61ef32a64db5215fdb3445af8852b1d4a166471c6c83bfffa898b6618e0cb747",
-  "sig": "67b78419f4c7c34068395be8c54b65120a7da869f5ef93df85a4a6a17c74a8cd83ba0704f30e12b11aa735481e73b77b47876c13912bcb4133509f2257783a2e"
+  "id": "77d7027d97e8310008dc07f27e06500f29f48eed4b9f5aa66d0a7a5012ce3396",
+  "sig": "7a26833f53f9eb10d8cf088cd0a02cfb2297347480cda3b1adb2b12367a115be4ecbb93ccdb4fa82f5aaeda2ad0e4dc98af39343cfd85277f04f48441bf74479"
 }
